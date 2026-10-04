@@ -279,7 +279,7 @@ class BillingController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $invoice = $this->invoiceRepository->findById($id);
 
-        if (!$invoice) {
+        if (! $invoice) {
             return new Response("Рахунок не знайдено", 404);
         }
 
@@ -299,7 +299,7 @@ class BillingController extends AbstractController
         $invoiceId = (int)($_POST['invoice_id'] ?? 0);
         $invoice = $this->invoiceRepository->findById($invoiceId);
 
-        if (!$invoice) {
+        if (! $invoice) {
             return new Response("Рахунок не знайдено", 404);
         }
 
@@ -335,7 +335,7 @@ class BillingController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $invoice = $this->invoiceRepository->findById($id);
 
-        if (!$invoice) {
+        if (! $invoice) {
             return new Response("Рахунок не знайдено", 404);
         }
 
@@ -389,7 +389,7 @@ class BillingController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $invoice = $this->invoiceRepository->findById($id);
 
-        if (!$invoice) {
+        if (! $invoice) {
             return new Response("Рахунок не знайдено", 404);
         }
 

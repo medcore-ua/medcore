@@ -62,7 +62,7 @@ class DictionaryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $dictionary = $this->dictionaryRepository->findById($id);
 
-        if (!$dictionary) {
+        if (! $dictionary) {
             return new Response("Словник не знайдено", 404);
         }
 
@@ -115,7 +115,7 @@ class DictionaryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $dictionary = $this->dictionaryRepository->findById($id);
 
-        if (!$dictionary) {
+        if (! $dictionary) {
             return new Response("Словник не знайдено", 404);
         }
 
@@ -136,7 +136,7 @@ class DictionaryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $dictionary = $this->dictionaryRepository->findById($id);
 
-        if (!$dictionary) {
+        if (! $dictionary) {
             return new Response("Словник не знайдено", 404);
         }
 
@@ -215,7 +215,7 @@ class DictionaryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $value = $this->dictionaryValueRepository->findValueById($id);
 
-        if (!$value) {
+        if (! $value) {
             return new Response("Значення словника не знайдено", 404);
         }
 

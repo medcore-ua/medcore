@@ -78,7 +78,7 @@ class RoleRepository extends ServiceEntityRepository
         /** @var Role|null $role */
         $role = $this->find($id);
 
-        if (!$role) {
+        if (! $role) {
             return false;
         }
 
@@ -102,7 +102,7 @@ class RoleRepository extends ServiceEntityRepository
     {
         $role = $this->find($id);
 
-        if (!$role) {
+        if (! $role) {
             return false;
         }
 

@@ -109,7 +109,7 @@ class AdminKpiController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $definition = $this->kpiRepository->findKpiDefinitionById($id);
 
-        if (!$definition) {
+        if (! $definition) {
             return new Response("Визначення KPI не знайдено", 404);
         }
 
@@ -130,7 +130,7 @@ class AdminKpiController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $definition = $this->kpiRepository->findKpiDefinitionById($id);
 
-        if (!$definition) {
+        if (! $definition) {
             return new Response("Визначення KPI не знайдено", 404);
         }
 

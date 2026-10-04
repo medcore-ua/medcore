@@ -86,7 +86,7 @@ class DepartmentController extends AbstractController
             'sort_order' => ['integer'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $departments = $this->departmentRepository->findAll();
             $parentOptions = array_filter($departments, fn ($dept) => null === $dept['parent_id']);
 
@@ -116,7 +116,7 @@ class DepartmentController extends AbstractController
 
         $department = $this->departmentRepository->findById($id);
 
-        if (!$department) {
+        if (! $department) {
             return new Response("Відділ не знайдено", 404);
         }
 
@@ -137,7 +137,7 @@ class DepartmentController extends AbstractController
 
         $department = $this->departmentRepository->findById($id);
 
-        if (!$department) {
+        if (! $department) {
             return new Response("Відділ не знайдено", 404);
         }
 
@@ -158,7 +158,7 @@ class DepartmentController extends AbstractController
 
         $department = $this->departmentRepository->findById($id);
 
-        if (!$department) {
+        if (! $department) {
             return new Response("Відділ не знайдено", 404);
         }
 
@@ -171,7 +171,7 @@ class DepartmentController extends AbstractController
             'sort_order' => ['integer'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $departments = $this->departmentRepository->findAll();
             $parentOptions = array_filter($departments, fn ($dept) => null === $dept['parent_id']);
 

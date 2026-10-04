@@ -72,7 +72,7 @@ class ClinicalReferenceController extends AbstractController
             foreach ($collection as $item) {
                 $code = $item->specific_code ?: $item->code;
                 $description = $item->specific_name_ua ?: $item->name_ua ?: $item->name_en ?: $item->specific_name_en;
-                if (!$code || !$description) {
+                if (! $code || ! $description) {
                     continue;
                 }
                 $rows[] = [
@@ -121,7 +121,7 @@ class ClinicalReferenceController extends AbstractController
             foreach ($collection as $item) {
                 $code = $item->specific_code ?: $item->code;
                 $description = $item->specific_name_ua ?: $item->name_ua ?: $item->name_en ?: $item->specific_name_en;
-                if (!$code || !$description) {
+                if (! $code || ! $description) {
                     continue;
                 }
                 $rows[] = [

@@ -52,7 +52,7 @@ class PrescriptionRepository extends ServiceEntityRepository
             ->join(\App\Domain\Patient\Patient::class, 'pat', \Doctrine\ORM\Query\Expr\Join::WITH, 'p.patient_id = pat.id')
             ->join(\App\Domain\User\User::class, 'doc', \Doctrine\ORM\Query\Expr\Join::WITH, 'p.doctor_id = doc.id');
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->where(
                 $qb->expr()->orX(
                     $qb->expr()->like("CONCAT(pat.last_name, ' ', pat.first_name)", ':searchTerm'),
@@ -87,12 +87,12 @@ class PrescriptionRepository extends ServiceEntityRepository
             $prescription = new Prescription();
             $prescription->setPatientId((int)$data['patient_id']);
             $prescription->setDoctorId((int)$data['doctor_id']);
-            $prescription->setMedicalRecordId(!empty($data['medical_record_id']) ? (int)$data['medical_record_id'] : null);
+            $prescription->setMedicalRecordId(! empty($data['medical_record_id']) ? (int)$data['medical_record_id'] : null);
 
-            if (!empty($data['issue_date'])) {
+            if (! empty($data['issue_date'])) {
                 $prescription->setIssueDate(new \DateTime($data['issue_date']));
             }
-            if (!empty($data['expiry_date'])) {
+            if (! empty($data['expiry_date'])) {
                 $prescription->setExpiryDate(new \DateTime($data['expiry_date']));
             }
             $prescription->setNotes($data['notes'] ?? null);
@@ -101,7 +101,7 @@ class PrescriptionRepository extends ServiceEntityRepository
             $em->flush();
             $prescriptionId = $prescription->getId();
 
-            if (!empty($data['items']) && is_array($data['items'])) {
+            if (! empty($data['items']) && is_array($data['items'])) {
                 $this->prescriptionItemRepository->saveItems($prescriptionId, $data['items']);
             }
 
@@ -182,7 +182,7 @@ class PrescriptionRepository extends ServiceEntityRepository
             ->where('p.doctor_id = :doctor_id')
             ->setParameter('doctor_id', $doctorId);
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->andWhere(
                 $qb->expr()->like("CONCAT(pat.last_name, ' ', pat.first_name)", ':searchTerm')
             )->setParameter('searchTerm', '%' . $searchTerm . '%');

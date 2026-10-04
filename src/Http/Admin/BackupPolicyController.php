@@ -93,7 +93,7 @@ class BackupPolicyController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $policy = $this->backupPolicyRepository->findById($id);
 
-        if (!$policy) {
+        if (! $policy) {
             return new Response("Політику резервного копіювання не знайдено", 404);
         }
 
@@ -114,7 +114,7 @@ class BackupPolicyController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $policy = $this->backupPolicyRepository->findById($id);
 
-        if (!$policy) {
+        if (! $policy) {
             return new Response("Політику резервного копіювання не знайдено", 404);
         }
 

@@ -68,7 +68,7 @@ class PatientVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 
@@ -106,7 +106,7 @@ class PatientVoter extends Voter
 
     private function canViewOwn(User $user, ?int $patientId) : bool
     {
-        if (!$patientId) {
+        if (! $patientId) {
             return false;
         }
 
@@ -128,7 +128,7 @@ class PatientVoter extends Voter
 
     private function canEditOwn(User $user, ?int $patientId) : bool
     {
-        if (!$patientId) {
+        if (! $patientId) {
             return false;
         }
 
@@ -138,7 +138,7 @@ class PatientVoter extends Voter
     private function isPatientAssignedToDoctor(int $patientId, User $user) : bool
     {
         $userId = $user->getId();
-        if (!$userId) {
+        if (! $userId) {
             return false;
         }
 

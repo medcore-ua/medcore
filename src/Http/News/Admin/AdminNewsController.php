@@ -107,7 +107,7 @@ class AdminNewsController extends AbstractController
 
         $newsArticle = $this->newsRepository->findById($id);
 
-        if (!$newsArticle) {
+        if (! $newsArticle) {
             return $this->render('errors/error.html.twig', [
                 'message' => 'Новина не знайдена.',
                 'detail' => 'Немає статті за вказаним ідентифікатором.'
@@ -137,7 +137,7 @@ class AdminNewsController extends AbstractController
 
         $newsArticle = $this->newsRepository->findById($id);
 
-        if (!$newsArticle) {
+        if (! $newsArticle) {
             return $this->render('errors/error.html.twig', [
                 'message' => 'Новина не знайдена.',
                 'detail' => 'Немає статті за вказаним ідентифікатором.'

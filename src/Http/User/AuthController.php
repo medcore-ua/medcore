@@ -144,7 +144,7 @@ class AuthController extends AbstractController
 
             $roleRequiresMfa = in_array((int)$user['role_id'], $mfaForceRoles, true);
 
-            if ($roleRequiresMfa && !$mfaService->isMfaEnabled($user['id'])) {
+            if ($roleRequiresMfa && ! $mfaService->isMfaEnabled($user['id'])) {
                 $session->set('mfa_required', true);
                 $session->set('mfa_required_type', 'totp');
                 $session->set('mfa_pending_user_id', $user['id']);

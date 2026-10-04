@@ -116,7 +116,7 @@ class AppAppointmentController extends AbstractController
         $this->denyAccessUnlessGranted('APPOINTMENT_EDIT');
         $id = (int)($_POST['id'] ?? 0);
         $entry = $this->waitlistRepository->findWaitlistById($id);
-        if (!$entry) {
+        if (! $entry) {
             return new Response("Заявку не знайдено", 404);
         }
         $this->waitlistRepository->updateWaitlistStatus($id, 'cancelled');
@@ -154,10 +154,10 @@ class AppAppointmentController extends AbstractController
             $entry = $this->waitlistRepository->findWaitlistById($waitlistId);
             if ($entry) {
                 $prefill['waitlist_id'] = $waitlistId;
-                if (!empty($entry['desired_doctor_id'])) {
+                if (! empty($entry['desired_doctor_id'])) {
                     $prefill['doctor_id'] = $entry['desired_doctor_id'];
                 }
-                if (!empty($entry['desired_start_time'])) {
+                if (! empty($entry['desired_start_time'])) {
                     try {
                         $dt = $this->normalizeDateTime($entry['desired_start_time']);
                         $prefill['start_time'] = $dt->format('Y-m-d\TH:i');
@@ -174,7 +174,7 @@ class AppAppointmentController extends AbstractController
         }
 
         $doctorOptions = [];
-        if ($this->isGranted('APPOINTMENT_VIEW_OWN') && !$this->isGranted('APPOINTMENT_VIEW_ANY')) {
+        if ($this->isGranted('APPOINTMENT_VIEW_OWN') && ! $this->isGranted('APPOINTMENT_VIEW_ANY')) {
             foreach ($doctors as $doctor) {
                 if ((int)$doctor['id'] === $user->getId()) {
                     $doctorOptions[$doctor['id']] = $doctor['full_name'];
@@ -219,7 +219,7 @@ class AppAppointmentController extends AbstractController
 
         $submittedDoctorId = (int)($_POST['doctor_id'] ?? 0);
 
-        if ($this->isGranted('APPOINTMENT_VIEW_OWN') && !$this->isGranted('APPOINTMENT_VIEW_ANY') && $user->getId() !== $submittedDoctorId) {
+        if ($this->isGranted('APPOINTMENT_VIEW_OWN') && ! $this->isGranted('APPOINTMENT_VIEW_ANY') && $user->getId() !== $submittedDoctorId) {
             return new Response("Доступ заборонено: Ви можете створювати записи лише для себе.", 403);
         }
 
@@ -239,7 +239,7 @@ class AppAppointmentController extends AbstractController
             'end_time' => ['required', 'datetime'],
         ];
 
-        if (!$validator->validate($rawInput, $rules)) {
+        if (! $validator->validate($rawInput, $rules)) {
             $errors = [];
             foreach ($validator->getErrors() as $key => $messages) {
                 $errors[$key] = is_array($messages) ? reset($messages) : $messages;
@@ -259,7 +259,7 @@ class AppAppointmentController extends AbstractController
                 }
             }
 
-            if (!$isSlotAvailable) {
+            if (! $isSlotAvailable) {
                 $errors['start_time'] = 'The selected time slot is no longer available. Please choose another one.';
             }
 
@@ -270,14 +270,14 @@ class AppAppointmentController extends AbstractController
                 'room_id' => $rawInput['room_id'] ?? null
             ]);
 
-            if (!$roomValidation['valid']) {
+            if (! $roomValidation['valid']) {
                 foreach ($roomValidation['errors'] as $error) {
                     $errors[$error['field']] = $error['message'];
                 }
             }
         }
 
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             $patients = $this->patientRepository->findAllActive();
             $doctors = $this->userRepository->findAllDoctors();
             $services = $this->serviceRepository->findAll();
@@ -297,7 +297,7 @@ class AppAppointmentController extends AbstractController
 
             $availableSlots = [];
             $selectedDateStr = date('Y-m-d');
-            if (!empty($rawInput['start_time'])) {
+            if (! empty($rawInput['start_time'])) {
                 try {
                     $startTime = new \DateTime($rawInput['start_time']);
                     $selectedDateStr = $startTime->format('Y-m-d');
@@ -417,7 +417,7 @@ class AppAppointmentController extends AbstractController
                 'resourceId' => $appointment['doctor_id'],
             ];
 
-            if (!empty($appointment['room_id'])) {
+            if (! empty($appointment['room_id'])) {
                 $events[] = [
                     'title' => $appointment['patient_name'] . ' (' . ($appointment['room_name'] ?? 'Кімната ' . $appointment['room_id']) . ')',
                     'start' => $appointment['start_time'],
@@ -440,7 +440,7 @@ class AppAppointmentController extends AbstractController
 
         $appointment = $this->appointmentRepository->findById($id);
 
-        if (!$appointment) {
+        if (! $appointment) {
             return new Response("Запис не знайдено", 404);
         }
 
@@ -455,7 +455,7 @@ class AppAppointmentController extends AbstractController
 
         $appointment = $this->appointmentRepository->findById($id);
 
-        if (!$appointment) {
+        if (! $appointment) {
             return new Response("Запис не знайдено", 404);
         }
 
@@ -469,7 +469,7 @@ class AppAppointmentController extends AbstractController
         }
 
         $doctorOptions = [];
-        if ($this->isGranted('APPOINTMENT_VIEW_OWN') && !$this->isGranted('APPOINTMENT_VIEW_ANY')) {
+        if ($this->isGranted('APPOINTMENT_VIEW_OWN') && ! $this->isGranted('APPOINTMENT_VIEW_ANY')) {
             foreach ($doctors as $doctor) {
                 if ((int)$doctor['id'] === $user->getId()) {
                     $doctorOptions[$doctor['id']] = $doctor['full_name'];
@@ -504,7 +504,7 @@ class AppAppointmentController extends AbstractController
         $rawInput = $_POST;
 
         foreach (['start_time', 'end_time'] as $field) {
-            if (!empty($_POST[$field])) {
+            if (! empty($_POST[$field])) {
                 try {
                     $dt = $this->normalizeDateTime($_POST[$field]);
                     $_POST[$field] = $dt->format('Y-m-d H:i:s');
@@ -518,7 +518,7 @@ class AppAppointmentController extends AbstractController
         $id = (int)($_POST['id'] ?? 0);
         $appointment = $this->appointmentRepository->findById($id);
 
-        if (!$appointment) {
+        if (! $appointment) {
             return new Response("Запис не знайдено", 404);
         }
 
@@ -533,20 +533,20 @@ class AppAppointmentController extends AbstractController
             'status' => ['required', 'in:scheduled,completed,cancelled,no-show'],
         ];
 
-        if (!empty($_POST['start_time']) && !empty($_POST['end_time'])) {
+        if (! empty($_POST['start_time']) && ! empty($_POST['end_time'])) {
             if (strtotime($_POST['end_time']) <= strtotime($_POST['start_time'])) {
                 $validator->addError('end_time', 'Час закінчення має бути пізніше за час початку.');
             }
         }
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $errors = [];
             foreach ($validator->getErrors() as $key => $messages) {
                 $errors[$key] = is_array($messages) ? reset($messages) : $messages;
             }
         }
 
-        if (!empty($_POST['start_time']) && !empty($_POST['end_time'])) {
+        if (! empty($_POST['start_time']) && ! empty($_POST['end_time'])) {
             $roomValidation = $this->schedulingService->validateAppointmentBooking([
                 'doctor_id' => (int)$_POST['doctor_id'],
                 'start_time' => $_POST['start_time'],
@@ -555,14 +555,14 @@ class AppAppointmentController extends AbstractController
                 'exclude_id' => $id
             ]);
 
-            if (!$roomValidation['valid']) {
+            if (! $roomValidation['valid']) {
                 foreach ($roomValidation['errors'] as $error) {
                     $errors[$error['field']] = $error['message'];
                 }
             }
         }
 
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             $patients = $this->patientRepository->findAllActive();
             $doctors = $this->userRepository->findAllDoctors();
             $rooms = $this->roomRepository->findAll();
@@ -620,7 +620,7 @@ class AppAppointmentController extends AbstractController
 
         $appointment = $this->appointmentRepository->findById($id);
 
-        if (!$appointment) {
+        if (! $appointment) {
             return new Response("Запис не знайдено", 404);
         }
 
@@ -684,7 +684,7 @@ class AppAppointmentController extends AbstractController
             'patient_id' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $waitlistEntries = $this->waitlistRepository->getWaitlistEntries('pending');
             $patients = $this->patientRepository->findAllActive();
             $doctors = $this->userRepository->findAllDoctors();
@@ -733,7 +733,7 @@ class AppAppointmentController extends AbstractController
         $selectedDateStr = $_GET['date'] ?? null;
         $selectedServiceId = (int)($_GET['service_id'] ?? 0);
 
-        if (!$selectedDoctorId || !$selectedDateStr || !$selectedServiceId) {
+        if (! $selectedDoctorId || ! $selectedDateStr || ! $selectedServiceId) {
             return new JsonResponse(['error' => 'Doctor, service, and date are required.']);
         }
 
@@ -764,7 +764,7 @@ class AppAppointmentController extends AbstractController
         $this->denyAccessUnlessGranted('APPOINTMENT_CREATE');
         $id = (int)($_GET['id'] ?? 0);
         $entry = $this->waitlistRepository->findWaitlistById($id);
-        if (!$entry) {
+        if (! $entry) {
             return new Response("Заявку не знайдено", 404);
         }
 
@@ -817,7 +817,7 @@ class AppAppointmentController extends AbstractController
         $this->denyAccessUnlessGranted('APPOINTMENT_EDIT');
         $id = (int)($_POST['id'] ?? 0);
         $entry = $this->waitlistRepository->findWaitlistById($id);
-        if (!$entry) {
+        if (! $entry) {
             return new Response("Заявку не знайдено", 404);
         }
         $this->waitlistRepository->updateWaitlistStatus($id, 'cancelled');

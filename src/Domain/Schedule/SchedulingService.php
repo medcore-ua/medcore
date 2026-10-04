@@ -69,7 +69,7 @@ class SchedulingService
         // 1. Get default schedule for the day
         $defaultSchedule = $this->doctorScheduleRepository->findByDoctorAndDay($doctorId, $dayOfWeek);
 
-        if (!$defaultSchedule || !$defaultSchedule['is_available']) {
+        if (! $defaultSchedule || ! $defaultSchedule['is_available']) {
             return []; // Doctor is not available on this day by default
         }
 
@@ -95,7 +95,7 @@ class SchedulingService
             $exceptionStartTime = new DateTime($date->format('Y-m-d') . ' ' . $exception['start_time']);
             $exceptionEndTime = new DateTime($date->format('Y-m-d') . ' ' . $exception['end_time']);
 
-            if (!$exception['is_available']) {
+            if (! $exception['is_available']) {
                 // If exception is unavailable, remove this time from working periods
                 $newWorkingPeriods = [];
                 foreach ($workingPeriods as $period) {
@@ -169,7 +169,7 @@ class SchedulingService
                 }
             }
 
-            $isAvailable = !$isInPast && !$isBooked;
+            $isAvailable = ! $isInPast && ! $isBooked;
 
             $finalSlots[] = [
                 'time' => $slot,
@@ -187,13 +187,13 @@ class SchedulingService
      */
     public function isRoomAvailable(?int $roomId, DateTime $startTime, DateTime $endTime, ?int $excludeAppointmentId = null) : bool
     {
-        if (!$roomId) {
+        if (! $roomId) {
             return true; // No room specified, always available
         }
 
         // Check if room exists and is available
         $room = $this->roomRepository->findById($roomId);
-        if (!$room || !$room['is_available']) {
+        if (! $room || ! $room['is_available']) {
             return false;
         }
 
@@ -213,7 +213,7 @@ class SchedulingService
 
         // Check if any conflicting appointments are not cancelled
         foreach ($conflictingAppointments as $appointment) {
-            if (!in_array($appointment['status'], ['cancelled', 'no-show'])) {
+            if (! in_array($appointment['status'], ['cancelled', 'no-show'])) {
                 return false;
             }
         }
@@ -258,7 +258,7 @@ class SchedulingService
         }
 
         // Check room availability
-        if ($roomId && !$this->isRoomAvailable($roomId, $startTime, $endTime, $excludeAppointmentId)) {
+        if ($roomId && ! $this->isRoomAvailable($roomId, $startTime, $endTime, $excludeAppointmentId)) {
             $result['available'] = false;
             $result['conflicts'][] = [
                 'type' => 'room',
@@ -304,7 +304,7 @@ class SchedulingService
         $excludeAppointmentId = $data['exclude_id'] ?? null;
 
         // Check if room is available (if specified)
-        if ($roomId && !$this->isRoomAvailable($roomId, $startTime, $endTime, $excludeAppointmentId)) {
+        if ($roomId && ! $this->isRoomAvailable($roomId, $startTime, $endTime, $excludeAppointmentId)) {
             $result['valid'] = false;
             $result['errors'][] = [
                 'field' => 'room_id',
@@ -314,7 +314,7 @@ class SchedulingService
 
         // Check doctor availability
         $doctorAvailability = $this->isTimeSlotAvailable($doctorId, $roomId, $startTime, $endTime, $excludeAppointmentId);
-        if (!$doctorAvailability['available']) {
+        if (! $doctorAvailability['available']) {
             $result['valid'] = false;
             foreach ($doctorAvailability['conflicts'] as $conflict) {
                 $result['errors'][] = [

@@ -90,7 +90,7 @@ class HrmController extends AbstractController
             'hire_date' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             // Re-fetch users for the form
             $users = $this->userRepository->findAll();
             return $this->render('hrm/new.html.twig', [
@@ -117,7 +117,7 @@ class HrmController extends AbstractController
 
         $employee = $this->hrmRepository->findById($id);
 
-        if (!$employee) {
+        if (! $employee) {
             return new Response("Співробітника не знайдено", 404);
         }
 
@@ -134,7 +134,7 @@ class HrmController extends AbstractController
 
         $employee = $this->hrmRepository->findById($id);
 
-        if (!$employee) {
+        if (! $employee) {
             return new Response("Співробітника не знайдено", 404);
         }
 
@@ -156,7 +156,7 @@ class HrmController extends AbstractController
 
         $employee = $this->hrmRepository->findById($id);
 
-        if (!$employee) {
+        if (! $employee) {
             return new Response("Співробітника не знайдено", 404);
         }
 
@@ -168,7 +168,7 @@ class HrmController extends AbstractController
             'hire_date' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             // Re-fetch users for the form
             $users = $this->userRepository->findAll();
             return $this->render('hrm/edit.html.twig', [

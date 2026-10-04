@@ -47,7 +47,7 @@ class SessionAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request) : ?bool
     {
-        if (!$request->hasSession()) {
+        if (! $request->hasSession()) {
             return false;
         }
 
@@ -61,7 +61,7 @@ class SessionAuthenticator extends AbstractAuthenticator
 
         return new SelfValidatingPassport(new UserBadge((string) $userId, function (string $userIdentifier) : User {
             $user = $this->userRepository->find((int) $userIdentifier);
-            if (!$user) {
+            if (! $user) {
                 throw new UserNotFoundException();
             }
 

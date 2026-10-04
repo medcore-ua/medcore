@@ -58,10 +58,10 @@ class ContractRepository extends ServiceEntityRepository
         $contract->setDescription($data['description'] ?? null);
 
         try {
-            if (!empty($data['start_date'])) {
+            if (! empty($data['start_date'])) {
                 $contract->setStartDate(new \DateTime($data['start_date']));
             }
-            if (!empty($data['end_date'])) {
+            if (! empty($data['end_date'])) {
                 $contract->setEndDate(new \DateTime($data['end_date']));
             }
         } catch (\Exception $e) {
@@ -86,7 +86,7 @@ class ContractRepository extends ServiceEntityRepository
     {
         /** @var Contract|null $contract */
         $contract = $this->find($id);
-        if (!$contract) {
+        if (! $contract) {
             return false;
         }
 
@@ -133,7 +133,7 @@ class ContractRepository extends ServiceEntityRepository
     {
         /** @var Contract|null $contract */
         $contract = $this->find($id);
-        if (!$contract) {
+        if (! $contract) {
             return false;
         }
 

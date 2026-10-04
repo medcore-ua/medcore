@@ -76,7 +76,7 @@ class InstallCommand extends Command
         $io->text('Please configure the main administrator account.');
 
         $email = $io->ask('Administrator Email', 'admin@clinikos.pp.ua', function ($answer) {
-            if (!filter_var($answer, FILTER_VALIDATE_EMAIL)) {
+            if (! filter_var($answer, FILTER_VALIDATE_EMAIL)) {
                 throw new \RuntimeException('Please enter a valid email address.');
             }
             return $answer;
@@ -98,7 +98,7 @@ class InstallCommand extends Command
         $roleRepo = $this->entityManager->getRepository(Role::class);
         $role = $roleRepo->findOneBy(['name' => 'admin']);
 
-        if (!$role) {
+        if (! $role) {
             $role = new Role();
             $role->setName('admin');
             $role->setDescription('System Administrator');
@@ -151,7 +151,7 @@ class InstallCommand extends Command
 
         if ($targetPath) {
             $content = file_get_contents($targetPath);
-            if (!str_contains($content, 'APP_INSTALLED=true')) {
+            if (! str_contains($content, 'APP_INSTALLED=true')) {
                 $content = preg_replace('/^APP_INSTALLED=.*$/m', '', $content);
                 $content = trim($content) . "\nAPP_INSTALLED=true\n";
                 file_put_contents($targetPath, $content);

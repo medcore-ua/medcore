@@ -57,7 +57,7 @@ class ScheduleVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 
@@ -80,7 +80,7 @@ class ScheduleVoter extends Voter
     private function canView(User $user, ?int $doctorId) : bool
     {
         if ($this->security->isGranted('ROLE_SCHEDULE_VIEW')) {
-            if (!$this->security->isGranted('ROLE_DOCTOR') || !$doctorId) {
+            if (! $this->security->isGranted('ROLE_DOCTOR') || ! $doctorId) {
                 return true;
             }
 
@@ -93,7 +93,7 @@ class ScheduleVoter extends Voter
     private function canUpdate(User $user, ?int $doctorId) : bool
     {
         if ($this->security->isGranted('ROLE_SCHEDULE_UPDATE')) {
-            if (!$this->security->isGranted('ROLE_DOCTOR') || !$doctorId) {
+            if (! $this->security->isGranted('ROLE_DOCTOR') || ! $doctorId) {
                 return true;
             }
 
@@ -105,11 +105,11 @@ class ScheduleVoter extends Voter
 
     private function canManageOwn(User $user, ?int $doctorId) : bool
     {
-        if (!$this->security->isGranted('ROLE_DOCTOR')) {
+        if (! $this->security->isGranted('ROLE_DOCTOR')) {
             return false;
         }
 
-        if (!$doctorId) {
+        if (! $doctorId) {
             return true;
         }
 

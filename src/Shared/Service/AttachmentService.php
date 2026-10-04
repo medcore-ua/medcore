@@ -53,7 +53,7 @@ class AttachmentService
         if (null !== $uploadDir) {
             $this->uploadDir = $uploadDir;
         }
-        if (!is_dir($this->uploadDir)) {
+        if (! is_dir($this->uploadDir)) {
             mkdir($this->uploadDir, 0775, true);
         }
     }
@@ -70,7 +70,7 @@ class AttachmentService
         $tempPath = $fileData['tmp_name'];
 
         $targetDir = $this->uploadDir . '/' . $entityType . '/' . $entityId;
-        if (!is_dir($targetDir)) {
+        if (! is_dir($targetDir)) {
             mkdir($targetDir, 0775, true);
         }
 
@@ -78,7 +78,7 @@ class AttachmentService
         $targetPath = $targetDir . '/' . $uniqueFilename;
         $relativePath = str_replace($this->uploadDir . '/', '', $targetPath);
 
-        if (!move_uploaded_file($tempPath, $targetPath)) {
+        if (! move_uploaded_file($tempPath, $targetPath)) {
             return false;
         }
 
@@ -119,7 +119,7 @@ class AttachmentService
     public function createNewVersion(int $attachmentId, array $fileData, ?int $userId = null)
     {
         $attachment = $this->attachmentRepository->findById($attachmentId);
-        if (!$attachment) {
+        if (! $attachment) {
             return false;
         }
 
@@ -129,7 +129,7 @@ class AttachmentService
         $tempPath = $fileData['tmp_name'];
 
         $targetDir = $this->uploadDir . '/' . $attachment->getEntityType() . '/' . $attachment->getEntityId();
-        if (!is_dir($targetDir)) {
+        if (! is_dir($targetDir)) {
             mkdir($targetDir, 0775, true);
         }
 
@@ -137,7 +137,7 @@ class AttachmentService
         $targetPath = $targetDir . '/' . $uniqueFilename;
         $relativePath = str_replace($this->uploadDir . '/', '', $targetPath);
 
-        if (!move_uploaded_file($tempPath, $targetPath)) {
+        if (! move_uploaded_file($tempPath, $targetPath)) {
             return false;
         }
 

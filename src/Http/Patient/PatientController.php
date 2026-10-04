@@ -104,14 +104,14 @@ class PatientController extends AbstractController
             'phone' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             return $this->render('patient/new.html.twig', [
                 'errors' => $validator->getErrors(),
                 'old' => $_POST,
             ]);
         }
 
-        if (!$this->patientRepository->save($_POST)) {
+        if (! $this->patientRepository->save($_POST)) {
             $errorCode = $this->patientRepository->getLastError();
             $errors = [];
             if ('tax_id_exists' === $errorCode) {
@@ -138,7 +138,7 @@ class PatientController extends AbstractController
 
         $patient = $this->patientRepository->findById($id);
 
-        if (!$patient) {
+        if (! $patient) {
             return new Response("Пацієнта не знайдено", 404);
         }
 
@@ -160,7 +160,7 @@ class PatientController extends AbstractController
 
         $patient = $this->patientRepository->findById($id);
 
-        if (!$patient) {
+        if (! $patient) {
             return new Response("Пацієнта не знайдено", 404);
         }
 
@@ -175,7 +175,7 @@ class PatientController extends AbstractController
 
         $patient = $this->patientRepository->findById($id);
 
-        if (!$patient) {
+        if (! $patient) {
             return new Response("Пацієнта не знайдено", 404);
         }
 
@@ -188,14 +188,14 @@ class PatientController extends AbstractController
             'phone' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             return $this->render('patient/edit.html.twig', [
                 'errors' => $validator->getErrors(),
                 'patient' => array_merge($patient, $_POST),
             ]);
         }
 
-        if (!$this->patientRepository->update($id, $_POST)) {
+        if (! $this->patientRepository->update($id, $_POST)) {
             $errorCode = $this->patientRepository->getLastError();
             $errors = [];
             if ('tax_id_exists' === $errorCode) {
@@ -232,7 +232,7 @@ class PatientController extends AbstractController
             ];
         }, $patients);
 
-        $headers = !empty($patients) ? array_keys($patients[0]) : ['id', 'first_name', 'last_name', 'birth_date', 'gender', 'phone', 'email', 'address', 'tax_id'];
+        $headers = ! empty($patients) ? array_keys($patients[0]) : ['id', 'first_name', 'last_name', 'birth_date', 'gender', 'phone', 'email', 'address', 'tax_id'];
         if (empty($patients)) {
             $patients[] = array_combine($headers, ['N/A', '', '', '', '', '', '', '', '']);
         }
@@ -298,7 +298,7 @@ class PatientController extends AbstractController
             return $this->redirectToRoute('patient_import_json');
         }
 
-        if (!is_array($patientsData) || empty($patientsData)) {
+        if (! is_array($patientsData) || empty($patientsData)) {
             $_SESSION['errors']['file'] = 'JSON файл не містить коректних даних пацієнтів.';
             return $this->redirectToRoute('patient_import_json');
         }
@@ -318,7 +318,7 @@ class PatientController extends AbstractController
             ];
 
             if (
-                !$validator->validate(
+                ! $validator->validate(
                     $patientData,
                     $rules
                 )
@@ -348,7 +348,7 @@ class PatientController extends AbstractController
             }
         }
 
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             $_SESSION['errors']['import'] = $errors;
         }
 
@@ -379,7 +379,7 @@ class PatientController extends AbstractController
         $this->denyAccessUnlessGranted('PATIENT_EDIT', $patientId);
 
         $patient = $this->patientRepository->findById($patientId);
-        if (!$patient) {
+        if (! $patient) {
             return new Response("Пацієнта не знайдено", 404);
         }
 
@@ -397,7 +397,7 @@ class PatientController extends AbstractController
         $this->denyAccessUnlessGranted('PATIENT_EDIT', $patientId);
 
         $patient = $this->patientRepository->findById($patientId);
-        if (!$patient) {
+        if (! $patient) {
             return new Response("Пацієнта не знайдено", 404);
         }
 
@@ -408,7 +408,7 @@ class PatientController extends AbstractController
             'valid_from' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $insuranceCompanies = $this->insuranceService->getAllInsuranceCompanies();
             return $this->render('patient/policies/new.html.twig', [
                 'errors' => $validator->getErrors(),
@@ -442,7 +442,7 @@ class PatientController extends AbstractController
         $patient = $this->patientRepository->findById($patientId);
         $policy = $this->insuranceService->getPatientPolicy($policyId);
 
-        if (!$patient || !$policy || $policy['patient_id'] != $patientId) {
+        if (! $patient || ! $policy || $policy['patient_id'] != $patientId) {
             return new Response("Ресурс не знайдено", 404);
         }
 
@@ -464,7 +464,7 @@ class PatientController extends AbstractController
         $patient = $this->patientRepository->findById($patientId);
         $policy = $this->insuranceService->getPatientPolicy($policyId);
 
-        if (!$patient || !$policy || $policy['patient_id'] != $patientId) {
+        if (! $patient || ! $policy || $policy['patient_id'] != $patientId) {
             return new Response("Ресурс не знайдено", 404);
         }
 
@@ -475,7 +475,7 @@ class PatientController extends AbstractController
             'valid_from' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $insuranceCompanies = $this->insuranceService->getAllInsuranceCompanies();
             return $this->render('patient/policies/edit.html.twig', [
                 'errors' => $validator->getErrors(),

@@ -92,7 +92,7 @@ class RoomRepository extends ServiceEntityRepository
         /** @var Room|null $room */
         $room = $this->find($id);
 
-        if (!$room) {
+        if (! $room) {
             return false;
         }
 
@@ -132,7 +132,7 @@ class RoomRepository extends ServiceEntityRepository
     {
         $room = $this->find($id);
 
-        if (!$room) {
+        if (! $room) {
             return false;
         }
 

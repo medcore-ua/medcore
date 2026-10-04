@@ -45,7 +45,7 @@ class KpiResultRepository extends ServiceEntityRepository
                 'period_end' => new \DateTime($data['period_end']),
             ]);
 
-            if (!$kpiResult) {
+            if (! $kpiResult) {
                 $kpiResult = new KpiResult();
                 $kpiResult->setKpiId($data['kpi_id']);
                 $kpiResult->setUserId($data['user_id']);

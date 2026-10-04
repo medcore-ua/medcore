@@ -63,7 +63,7 @@ class OAuthController extends AbstractController
         $request ??= \Symfony\Component\HttpFoundation\Request::createFromGlobals();
         $providerConfig = $this->authConfigRepository->findByProvider($provider);
 
-        if (!$providerConfig || !$providerConfig['is_active']) {
+        if (! $providerConfig || ! $providerConfig['is_active']) {
             // Or handle this error more gracefully
             die("Провайдер не підтримується або вимкнений.");
         }
@@ -82,12 +82,12 @@ class OAuthController extends AbstractController
         $session = $request->getSession();
         $providerConfig = $this->authConfigRepository->findByProvider($provider);
 
-        if (!$providerConfig || !$providerConfig['is_active']) {
+        if (! $providerConfig || ! $providerConfig['is_active']) {
             die("Провайдер не підтримується або вимкнений.");
         }
 
         $providerObj = $this->getProvider($provider, $providerConfig);
-        if (empty($_GET['state']) || !$session->has('oauth2state') || ($_GET['state'] !== $session->get('oauth2state'))) {
+        if (empty($_GET['state']) || ! $session->has('oauth2state') || ($_GET['state'] !== $session->get('oauth2state'))) {
             $session->remove('oauth2state');
             die('Некоректний стан запиту.');
         }

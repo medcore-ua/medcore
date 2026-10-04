@@ -65,7 +65,7 @@ class AdminScheduleController extends AbstractController
         $doctorId = (int)($_GET['id'] ?? 0);
         $doctor = $this->userRepository->findById($doctorId);
 
-        if (!$doctor) {
+        if (! $doctor) {
             return $this->redirectToRoute('admin_schedules_index');
         }
 
@@ -147,7 +147,7 @@ class AdminScheduleController extends AbstractController
         $exceptionId = (int)$_POST['exception_id'];
         $exception = $this->scheduleExceptionRepository->findById($exceptionId);
 
-        if (!$exception) {
+        if (! $exception) {
             return $this->redirectToRoute('admin_schedules_index');
         }
 
@@ -173,7 +173,7 @@ class AdminScheduleController extends AbstractController
         $doctorId = (int)($_GET['id'] ?? 0);
         $doctor = $this->userRepository->findById($doctorId);
 
-        if (!$doctor) {
+        if (! $doctor) {
             return $this->redirectToRoute('admin_schedules_index');
         }
 

@@ -93,7 +93,7 @@ class ContractController extends AbstractController
         $filePath = null;
         if (isset($_FILES['contract_file']) && UPLOAD_ERR_OK === $_FILES['contract_file']['error']) {
             $uploadDir = dirname(__DIR__, 3) . '/uploads/contracts/';
-            if (!is_dir($uploadDir)) {
+            if (! is_dir($uploadDir)) {
                 mkdir($uploadDir, 0775, true);
             }
             $filename = uniqid('contract_', true) . '_' . basename($_FILES['contract_file']['name']);
@@ -119,7 +119,7 @@ class ContractController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $contract = $this->contractRepository->findById($id);
 
-        if (!$contract) {
+        if (! $contract) {
             return new Response("Контракт не знайдено", 404);
         }
 
@@ -134,7 +134,7 @@ class ContractController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $contract = $this->contractRepository->findById($id);
 
-        if (!$contract) {
+        if (! $contract) {
             return new Response("Контракт не знайдено", 404);
         }
 
@@ -155,7 +155,7 @@ class ContractController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $contract = $this->contractRepository->findById($id);
 
-        if (!$contract) {
+        if (! $contract) {
             return new Response("Контракт не знайдено", 404);
         }
 
@@ -176,7 +176,7 @@ class ContractController extends AbstractController
         $filePath = $contract['file_path']; // Keep existing path by default
         if (isset($_FILES['contract_file']) && UPLOAD_ERR_OK === $_FILES['contract_file']['error']) {
             $uploadDir = dirname(__DIR__, 3) . '/uploads/contracts/';
-            if (!is_dir($uploadDir)) {
+            if (! is_dir($uploadDir)) {
                 mkdir($uploadDir, 0775, true);
             }
             $filename = uniqid('contract_', true) . '_' . basename($_FILES['contract_file']['name']);
@@ -203,7 +203,7 @@ class ContractController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $contract = $this->contractRepository->findById($id);
 
-        if (!$contract) {
+        if (! $contract) {
             return new Response("Контракт не знайдено", 404);
         }
 
@@ -224,7 +224,7 @@ class ContractController extends AbstractController
 
         $contract = $this->contractRepository->findById($id);
 
-        if (!$contract || !$contract['file_path'] || !file_exists(dirname(__DIR__, 3) . '/' . $contract['file_path'])) {
+        if (! $contract || ! $contract['file_path'] || ! file_exists(dirname(__DIR__, 3) . '/' . $contract['file_path'])) {
             return new Response("Файл контракту не знайдено", 404);
         }
 

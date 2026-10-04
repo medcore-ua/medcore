@@ -48,7 +48,7 @@ class PatientRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('p');
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             // Doctrine doesn't natively support MATCH AGAINST without custom DQL functions,
             // so we fallback to standard LIKE searches for ORM portability.
             $qb->where('p.last_name LIKE :term')
@@ -74,7 +74,7 @@ class PatientRepository extends ServiceEntityRepository
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $ids);
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->andWhere(
                 $qb->expr()->orX(
                     $qb->expr()->like('p.last_name', ':term'),
@@ -107,7 +107,7 @@ class PatientRepository extends ServiceEntityRepository
             }
         }
 
-        if (!empty($data['tax_id']) && $this->findByTaxId($data['tax_id'])) {
+        if (! empty($data['tax_id']) && $this->findByTaxId($data['tax_id'])) {
             $this->lastError = 'tax_id_exists';
             return false;
         }
@@ -190,14 +190,14 @@ class PatientRepository extends ServiceEntityRepository
         $oldPatientArray = $this->findById($id);
         $oldStatus = $oldPatientArray['status'] ?? null;
 
-        if (!empty($data['tax_id']) && $this->findByTaxId($data['tax_id'], $id)) {
+        if (! empty($data['tax_id']) && $this->findByTaxId($data['tax_id'], $id)) {
             $this->lastError = 'tax_id_exists';
             return false;
         }
 
         /** @var Patient|null $patient */
         $patient = $this->find($id);
-        if (!$patient) {
+        if (! $patient) {
             return false;
         }
 
@@ -247,7 +247,7 @@ class PatientRepository extends ServiceEntityRepository
 
         /** @var Patient|null $patient */
         $patient = $this->find($id);
-        if (!$patient) {
+        if (! $patient) {
             return false;
         }
 

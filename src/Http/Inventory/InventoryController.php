@@ -108,7 +108,7 @@ class InventoryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $item = $this->inventoryItemRepository->findById($id);
 
-        if (!$item) {
+        if (! $item) {
             return new Response("Позицію складу не знайдено", 404);
         }
 
@@ -128,7 +128,7 @@ class InventoryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $item = $this->inventoryItemRepository->findById($id);
 
-        if (!$item) {
+        if (! $item) {
             return new Response("Позицію складу не знайдено", 404);
         }
 
@@ -154,7 +154,7 @@ class InventoryController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $item = $this->inventoryItemRepository->findById($id);
 
-        if (!$item) {
+        if (! $item) {
             return new Response("Позицію складу не знайдено", 404);
         }
 

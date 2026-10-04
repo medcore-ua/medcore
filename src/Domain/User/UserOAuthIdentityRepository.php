@@ -83,7 +83,7 @@ class UserOAuthIdentityRepository extends ServiceEntityRepository
     {
         $identity = $this->find($id);
 
-        if (!$identity) {
+        if (! $identity) {
             return false;
         }
 

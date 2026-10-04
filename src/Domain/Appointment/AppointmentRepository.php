@@ -89,11 +89,11 @@ class AppointmentRepository extends ServiceEntityRepository
             $appointment->setNotes($data['notes']);
         }
 
-        if (!empty($data['waitlist_id'])) {
+        if (! empty($data['waitlist_id'])) {
             $appointment->setWaitlistId($data['waitlist_id']);
         }
 
-        if (!empty($data['room_id'])) {
+        if (! empty($data['room_id'])) {
             $appointment->setRoomId($data['room_id']);
         }
 
@@ -159,13 +159,13 @@ class AppointmentRepository extends ServiceEntityRepository
     public function update(int $id, array $data) : bool
     {
         $oldAppointment = $this->findById($id);
-        if (!$oldAppointment) {
+        if (! $oldAppointment) {
             return false;
         }
 
         /** @var Appointment|null $appointment */
         $appointment = $this->find($id);
-        if (!$appointment) {
+        if (! $appointment) {
             return false;
         }
 
@@ -213,13 +213,13 @@ class AppointmentRepository extends ServiceEntityRepository
     public function updateStatus(int $id, string $status) : bool
     {
         $oldAppointment = $this->findById($id);
-        if (!$oldAppointment) {
+        if (! $oldAppointment) {
             return false;
         }
 
         /** @var Appointment|null $appointment */
         $appointment = $this->find($id);
-        if (!$appointment) {
+        if (! $appointment) {
             return false;
         }
 
@@ -510,7 +510,7 @@ class AppointmentRepository extends ServiceEntityRepository
         $doctors = [];
         foreach ($results as $row) {
             $docId = $row['doctor_id'];
-            if (!isset($doctors[$docId])) {
+            if (! isset($doctors[$docId])) {
                 $doctors[$docId] = [
                     'doctor_id' => $docId,
                     'doctor_name' => $row['last_name'] . ' ' . $row['first_name'],
@@ -576,7 +576,7 @@ class AppointmentRepository extends ServiceEntityRepository
         $durations = [];
         foreach ($results as $row) {
             $docId = $row['doctor_id'];
-            if (!isset($durations[$docId])) {
+            if (! isset($durations[$docId])) {
                 $durations[$docId] = 0;
             }
             if ($row['start_time'] && $row['end_time']) {

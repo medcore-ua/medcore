@@ -97,7 +97,7 @@ class AuthConfigController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $config = $this->authConfigRepository->findById($id);
 
-        if (!$config) {
+        if (! $config) {
             return new Response("Конфігурацію аутентифікації не знайдено", 404);
         }
         $supportedProviders = OAuthController::getSupportedProviders();
@@ -120,7 +120,7 @@ class AuthConfigController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $config = $this->authConfigRepository->findById($id);
 
-        if (!$config) {
+        if (! $config) {
             return new Response("Конфігурацію аутентифікації не знайдено", 404);
         }
 
@@ -162,7 +162,7 @@ class AuthConfigController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $config = $this->authConfigRepository->findById($id);
 
-        if (!$config) {
+        if (! $config) {
             return new Response("Конфігурацію аутентифікації не знайдено", 404);
         }
 

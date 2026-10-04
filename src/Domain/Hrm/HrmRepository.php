@@ -59,10 +59,10 @@ class HrmRepository extends ServiceEntityRepository
         $employee->setPosition($data['position']);
         $employee->setDepartmentId($data['department_id'] ?? null);
         $employee->setHireDate(new \DateTime($data['hire_date']));
-        $employee->setSalary(!empty($data['salary']) ? (float)$data['salary'] : null);
+        $employee->setSalary(! empty($data['salary']) ? (float)$data['salary'] : null);
         $employee->setContactPhone($data['contact_phone'] ?? null);
         $employee->setStatus($data['status'] ?? 'active');
-        $employee->setUserId(!empty($data['user_id']) ? (int)$data['user_id'] : null);
+        $employee->setUserId(! empty($data['user_id']) ? (int)$data['user_id'] : null);
 
         $this->getEntityManager()->persist($employee);
         $this->getEntityManager()->flush();
@@ -79,7 +79,7 @@ class HrmRepository extends ServiceEntityRepository
             ->setParameter('id', $id);
 
         $result = $qb->getQuery()->getOneOrNullResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-        if (!$result) {
+        if (! $result) {
             return null;
         }
 
@@ -91,7 +91,7 @@ class HrmRepository extends ServiceEntityRepository
     public function update(int $id, array $data) : bool
     {
         $employee = $this->find($id);
-        if (!$employee) {
+        if (! $employee) {
             return false;
         }
 
@@ -101,11 +101,11 @@ class HrmRepository extends ServiceEntityRepository
         $employee->setPosition($data['position']);
         $employee->setDepartmentId($data['department_id'] ?? null);
         $employee->setHireDate(new \DateTime($data['hire_date']));
-        $employee->setFireDate(!empty($data['fire_date']) ? new \DateTime($data['fire_date']) : null);
-        $employee->setSalary(!empty($data['salary']) ? (float)$data['salary'] : null);
+        $employee->setFireDate(! empty($data['fire_date']) ? new \DateTime($data['fire_date']) : null);
+        $employee->setSalary(! empty($data['salary']) ? (float)$data['salary'] : null);
         $employee->setContactPhone($data['contact_phone'] ?? null);
         $employee->setStatus($data['status'] ?? 'active');
-        $employee->setUserId(!empty($data['user_id']) ? (int)$data['user_id'] : null);
+        $employee->setUserId(! empty($data['user_id']) ? (int)$data['user_id'] : null);
 
         $this->getEntityManager()->flush();
 
@@ -115,7 +115,7 @@ class HrmRepository extends ServiceEntityRepository
     public function updateStatus(int $id, string $status) : bool
     {
         $employee = $this->find($id);
-        if (!$employee) {
+        if (! $employee) {
             return false;
         }
 

@@ -109,7 +109,7 @@ class ServiceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $service = $this->serviceRepository->findById($id);
 
-        if (!$service) {
+        if (! $service) {
             return new Response("Послугу не знайдено", 404);
         }
 
@@ -137,7 +137,7 @@ class ServiceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $service = $this->serviceRepository->findById($id);
 
-        if (!$service) {
+        if (! $service) {
             return new Response("Послугу не знайдено", 404);
         }
 
@@ -224,7 +224,7 @@ class ServiceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $category = $this->serviceCategoryRepository->findById($id);
 
-        if (!$category) {
+        if (! $category) {
             return new Response("Категорію послуг не знайдено", 404);
         }
 
@@ -245,7 +245,7 @@ class ServiceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $category = $this->serviceCategoryRepository->findById($id);
 
-        if (!$category) {
+        if (! $category) {
             return new Response("Категорію послуг не знайдено", 404);
         }
 

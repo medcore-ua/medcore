@@ -76,7 +76,7 @@ class ServiceBundleRepository extends ServiceEntityRepository
 
             $bundleId = $bundle->getId();
 
-            if (!empty($data['services']) && is_array($data['services'])) {
+            if (! empty($data['services']) && is_array($data['services'])) {
                 $this->bundleServiceRepository->syncServices($bundleId, $data['services']);
             }
 
@@ -96,7 +96,7 @@ class ServiceBundleRepository extends ServiceEntityRepository
         try {
             /** @var ServiceBundle|null $bundle */
             $bundle = $this->find($id);
-            if (!$bundle) {
+            if (! $bundle) {
                 $em->rollBack();
                 return false;
             }

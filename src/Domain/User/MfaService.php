@@ -202,7 +202,7 @@ class MfaService
         $sql = "SELECT mfa_secret, mfa_type, mfa_counter, mfa_last_counter, mfa_backup_codes FROM users WHERE id = :id";
         $user = $conn->fetchAssociative($sql, ['id' => $userId]);
 
-        if (!$user || empty($user['mfa_secret'])) {
+        if (! $user || empty($user['mfa_secret'])) {
             return false;
         }
 
@@ -246,7 +246,7 @@ class MfaService
         $sql = "SELECT mfa_backup_codes FROM users WHERE id = :id";
         $user = $conn->fetchAssociative($sql, ['id' => $userId]);
 
-        if (!$user) {
+        if (! $user) {
             return;
         }
 

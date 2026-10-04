@@ -144,7 +144,7 @@ class AppScheduleController extends AbstractController
 
         $exception = $this->scheduleExceptionRepository->findById($exceptionId);
 
-        if (!$exception) {
+        if (! $exception) {
             return $this->redirectToRoute('doctor_schedule_index');
         }
 

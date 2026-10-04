@@ -71,7 +71,7 @@ class ServiceCategoryRepository extends ServiceEntityRepository
     {
         /** @var ServiceCategory|null $category */
         $category = $this->find($id);
-        if (!$category) {
+        if (! $category) {
             return false;
         }
 
@@ -94,7 +94,7 @@ class ServiceCategoryRepository extends ServiceEntityRepository
     {
         /** @var ServiceCategory|null $category */
         $category = $this->find($id);
-        if (!$category) {
+        if (! $category) {
             return false;
         }
 

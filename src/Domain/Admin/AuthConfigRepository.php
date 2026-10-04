@@ -91,7 +91,7 @@ class AuthConfigRepository extends ServiceEntityRepository
     {
         /** @var AuthConfig|null $config */
         $config = $this->find($id);
-        if (!$config) {
+        if (! $config) {
             return false;
         }
 
@@ -123,7 +123,7 @@ class AuthConfigRepository extends ServiceEntityRepository
     {
         /** @var AuthConfig|null $config */
         $config = $this->find($id);
-        if (!$config) {
+        if (! $config) {
             return false;
         }
 

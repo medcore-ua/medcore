@@ -103,7 +103,7 @@ class MfaController extends AbstractController
     #[Route('/user/mfa/setup/{type}', name: 'mfa_setup', methods: ['GET'], defaults: ['type' => 'totp'])]
     public function showMfaSetup(Request $request, string $type = 'totp', #[CurrentUser] ?User $currentUser = null) : Response
     {
-        if (!in_array($type, ['totp', 'hotp'], true)) {
+        if (! in_array($type, ['totp', 'hotp'], true)) {
             $type = 'totp';
         }
 
@@ -122,20 +122,20 @@ class MfaController extends AbstractController
 
         $userId = $session->get('mfa_pending_user_id') ?? ($currentUser?->getId());
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
         $user = $this->userRepository->findById($userId);
 
-        if (!$user) {
+        if (! $user) {
             $session->invalidate();
             return $this->redirectToRoute('login_form');
         }
 
         $isReset = isset($_GET['reset']) && '1' === $_GET['reset'];
 
-        if ($this->mfaService->isMfaEnabled($userId) && !$isReset) {
+        if ($this->mfaService->isMfaEnabled($userId) && ! $isReset) {
             return $this->redirectToRoute('user_profile');
         }
 
@@ -177,13 +177,13 @@ class MfaController extends AbstractController
         $session = $request->getSession();
         $userId = $session->get('mfa_pending_user_id');
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
         $user = $this->userRepository->findById($userId);
 
-        if (!$user) {
+        if (! $user) {
             $session->invalidate();
             return $this->redirectToRoute('login_form');
         }
@@ -196,20 +196,20 @@ class MfaController extends AbstractController
     #[Route('/user/mfa/required/{type}', name: 'mfa_required', methods: ['GET'], defaults: ['type' => 'totp'])]
     public function showMfaRequired(Request $request, string $type = 'totp') : Response
     {
-        if (!in_array($type, ['totp', 'hotp'], true)) {
+        if (! in_array($type, ['totp', 'hotp'], true)) {
             return $this->redirectToRoute('mfa_required_choice');
         }
 
         $session = $request->getSession();
         $userId = $session->get('mfa_pending_user_id');
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
         $user = $this->userRepository->findById($userId);
 
-        if (!$user) {
+        if (! $user) {
             $session->invalidate();
             return $this->redirectToRoute('login_form');
         }
@@ -218,7 +218,7 @@ class MfaController extends AbstractController
             $secret = $session->get('hotp_setup_secret');
             $backupCodes = $session->get('hotp_setup_backup_codes', []);
 
-            if (!$secret || !$backupCodes) {
+            if (! $secret || ! $backupCodes) {
                 $secret = [];
                 $counter = 0;
                 $qrCode = '';
@@ -239,7 +239,7 @@ class MfaController extends AbstractController
             $secret = $session->get('mfa_setup_secret');
             $backupCodes = $session->get('mfa_setup_backup_codes', []);
 
-            if (!$secret || !$backupCodes) {
+            if (! $secret || ! $backupCodes) {
                 $secret = '';
                 $qrCode = '';
                 $this->prepareTotpSetup($userId, $secret, $backupCodes, $qrCode, $session);
@@ -259,7 +259,7 @@ class MfaController extends AbstractController
     #[Route('/user/mfa/setup/{type}', name: 'mfa_setup_verify', methods: ['POST'], defaults: ['type' => 'totp'])]
     public function verifyMfaSetup(Request $request, string $type = 'totp', #[CurrentUser] ?User $currentUser = null) : Response
     {
-        if (!in_array($type, ['totp', 'hotp'], true)) {
+        if (! in_array($type, ['totp', 'hotp'], true)) {
             $type = 'totp';
         }
 
@@ -278,7 +278,7 @@ class MfaController extends AbstractController
 
         $userId = $session->get('mfa_pending_user_id') ?? ($currentUser?->getId());
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
@@ -289,7 +289,7 @@ class MfaController extends AbstractController
             $backupCodes = $session->get('hotp_setup_backup_codes', []);
             $counter = $session->get('hotp_setup_counter', 0);
 
-            if (!$secret) {
+            if (! $secret) {
                 return $this->redirectToRoute('mfa_setup', ['type' => 'hotp', 'reset' => 1]);
             }
 
@@ -335,7 +335,7 @@ class MfaController extends AbstractController
             $secret = $session->get('mfa_setup_secret');
             $backupCodes = $session->get('mfa_setup_backup_codes', []);
 
-            if (!$secret) {
+            if (! $secret) {
                 return $this->redirectToRoute('mfa_setup', ['type' => 'hotp', 'reset' => 1]);
             }
 
@@ -377,14 +377,14 @@ class MfaController extends AbstractController
     #[Route('/user/mfa/required/{type}', name: 'mfa_required_verify', methods: ['POST'], defaults: ['type' => 'totp'])]
     public function verifyMfaRequired(Request $request, string $type = 'totp') : Response
     {
-        if (!in_array($type, ['totp', 'hotp'], true)) {
+        if (! in_array($type, ['totp', 'hotp'], true)) {
             return $this->redirectToRoute('mfa_required_choice');
         }
 
         $session = $request->getSession();
         $userId = $session->get('mfa_pending_user_id');
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
@@ -393,7 +393,7 @@ class MfaController extends AbstractController
             $backupCodes = $session->get('hotp_setup_backup_codes', []);
             $counter = $session->get('hotp_setup_counter', 0);
 
-            if (!$secret) {
+            if (! $secret) {
                 $session->set('error_message', 'Помилка генерування коду. Спробуйте ще раз.');
                 return $this->redirectToRoute('mfa_required', ['type' => 'hotp']);
             }
@@ -435,7 +435,7 @@ class MfaController extends AbstractController
             $secret = $session->get('mfa_setup_secret');
             $backupCodes = $session->get('mfa_setup_backup_codes', []);
 
-            if (!$secret) {
+            if (! $secret) {
                 $session->set('error_message', 'Помилка генерування коду. Спробуйте ще раз.');
                 return $this->redirectToRoute('mfa_required', ['type' => 'totp']);
             }
@@ -481,7 +481,7 @@ class MfaController extends AbstractController
 
         $user = $this->userRepository->findById($userId);
 
-        if (!$user || !password_verify($password, $user['password_hash'])) {
+        if (! $user || ! password_verify($password, $user['password_hash'])) {
             $session->set('error_message', 'Невірний пароль.');
             return $this->redirectToRoute('user_profile');
         }
@@ -498,13 +498,13 @@ class MfaController extends AbstractController
         $session = $request->getSession();
         $userId = $session->get('mfa_pending_user_id');
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
         $user = $this->userRepository->findById($userId);
 
-        if (!$user) {
+        if (! $user) {
             $session->invalidate();
             return $this->redirectToRoute('login_form');
         }
@@ -527,7 +527,7 @@ class MfaController extends AbstractController
         $session = $request->getSession();
         $userId = $session->get('mfa_pending_user_id');
 
-        if (!$userId) {
+        if (! $userId) {
             return $this->redirectToRoute('login_form');
         }
 
@@ -568,12 +568,12 @@ class MfaController extends AbstractController
 
         $user = $this->userRepository->findById($userId);
 
-        if (!$user || !password_verify($password, $user['password_hash'])) {
+        if (! $user || ! password_verify($password, $user['password_hash'])) {
             $session->set('error_message', 'Невірний пароль.');
             return $this->redirectToRoute('user_profile');
         }
 
-        if (!$this->mfaService->isMfaEnabled($userId)) {
+        if (! $this->mfaService->isMfaEnabled($userId)) {
             return $this->redirectToRoute('user_profile');
         }
 

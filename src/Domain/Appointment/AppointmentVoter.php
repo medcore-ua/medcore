@@ -73,7 +73,7 @@ final class AppointmentVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 
@@ -114,7 +114,7 @@ final class AppointmentVoter extends Voter
 
     private function canViewOwn(User $user, ?int $appointmentId) : bool
     {
-        if (!$appointmentId) {
+        if (! $appointmentId) {
             return false;
         }
 
@@ -136,7 +136,7 @@ final class AppointmentVoter extends Voter
 
     private function canEditOwn(User $user, ?int $appointmentId) : bool
     {
-        if (!$appointmentId) {
+        if (! $appointmentId) {
             return false;
         }
 
@@ -145,7 +145,7 @@ final class AppointmentVoter extends Voter
 
     private function canCancelOwn(User $user, ?int $appointmentId) : bool
     {
-        if (!$appointmentId) {
+        if (! $appointmentId) {
             return false;
         }
 
@@ -168,7 +168,7 @@ final class AppointmentVoter extends Voter
     private function isUserOwnerOfAppointment(User $user, int $appointmentId) : bool
     {
         $userId = $user->getId();
-        if (!$userId) {
+        if (! $userId) {
             return false;
         }
         return $this->appointmentRepository->isAppointmentOwnedByDoctor($appointmentId, $userId);

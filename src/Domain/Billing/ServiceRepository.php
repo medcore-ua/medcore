@@ -78,7 +78,7 @@ class ServiceRepository extends ServiceEntityRepository
         $service->setName($data['name']);
         $service->setDescription($data['description'] ?? null);
         $service->setPrice((float)$data['price']);
-        $service->setCategoryId(!empty($data['category_id']) ? (int)$data['category_id'] : null);
+        $service->setCategoryId(! empty($data['category_id']) ? (int)$data['category_id'] : null);
         $service->setIsActive((bool)($data['is_active'] ?? true));
         // Note: duration_minutes isn't in original save method parameters but we should map it if available
         if (isset($data['duration_minutes'])) {
@@ -98,7 +98,7 @@ class ServiceRepository extends ServiceEntityRepository
     {
         /** @var Service|null $service */
         $service = $this->find($id);
-        if (!$service) {
+        if (! $service) {
             return false;
         }
 
@@ -112,13 +112,13 @@ class ServiceRepository extends ServiceEntityRepository
             $service->setPrice((float)$data['price']);
         }
         if (array_key_exists('category_id', $data)) {
-            $service->setCategoryId(!empty($data['category_id']) ? (int)$data['category_id'] : null);
+            $service->setCategoryId(! empty($data['category_id']) ? (int)$data['category_id'] : null);
         }
         if (isset($data['is_active'])) {
             $service->setIsActive((bool)$data['is_active']);
         }
         if (array_key_exists('duration_minutes', $data)) {
-            $service->setDurationMinutes(!empty($data['duration_minutes']) ? (int)$data['duration_minutes'] : null);
+            $service->setDurationMinutes(! empty($data['duration_minutes']) ? (int)$data['duration_minutes'] : null);
         }
 
         try {
@@ -133,7 +133,7 @@ class ServiceRepository extends ServiceEntityRepository
     {
         /** @var Service|null $service */
         $service = $this->find($id);
-        if (!$service) {
+        if (! $service) {
             return false;
         }
 

@@ -66,7 +66,7 @@ class LabOrderVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token) : bool
     {
         $user = $token->getUser();
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 
@@ -104,7 +104,7 @@ class LabOrderVoter extends Voter
 
     private function canViewOwn(User $user, ?int $labOrderId) : bool
     {
-        if (!$labOrderId) {
+        if (! $labOrderId) {
             return false;
         }
 
@@ -126,7 +126,7 @@ class LabOrderVoter extends Voter
 
     private function canEditOwn(User $user, ?int $labOrderId) : bool
     {
-        if (!$labOrderId) {
+        if (! $labOrderId) {
             return false;
         }
 
@@ -136,7 +136,7 @@ class LabOrderVoter extends Voter
     private function isOwner(User $user, int $labOrderId) : bool
     {
         $userId = $user->getId();
-        if (!$userId) {
+        if (! $userId) {
             return false;
         }
 

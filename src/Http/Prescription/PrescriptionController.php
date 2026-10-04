@@ -88,7 +88,7 @@ class PrescriptionController extends AbstractController
         $patientId = (int)($_GET['patient_id'] ?? 0);
         $patient = $this->patientRepository->findById($patientId);
 
-        if (!$patient) {
+        if (! $patient) {
             return new Response("Пацієнта не знайдено", 404);
         }
 
@@ -124,7 +124,7 @@ class PrescriptionController extends AbstractController
             'items.*.frequency' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $patient = $this->patientRepository->findById($_POST['patient_id']);
             $doctors = $this->userRepository->findAllDoctors();
             $medicalRecords = $this->medicalRecordRepository->findByPatientId($_POST['patient_id']);
@@ -146,7 +146,7 @@ class PrescriptionController extends AbstractController
 
         $prescriptionId = $this->prescriptionRepository->save($_POST);
 
-        if ($prescriptionId && !empty($_POST['items'])) {
+        if ($prescriptionId && ! empty($_POST['items'])) {
             foreach ($_POST['items'] as $itemData) {
                 $inventoryItem = $this->inventoryItemRepository->findByName($itemData['medication_name']);
 
@@ -175,7 +175,7 @@ class PrescriptionController extends AbstractController
 
         $prescription = $this->prescriptionRepository->findById($id);
 
-        if (!$prescription) {
+        if (! $prescription) {
             return new Response("Рецепт не знайдено", 404);
         }
 

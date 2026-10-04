@@ -64,7 +64,7 @@ class UserController extends AbstractController
 
         $user = $this->userRepository->findById($user->getId());
 
-        if (!$user) {
+        if (! $user) {
             session_destroy();
             return $this->redirectToRoute('login_form');
         }
@@ -109,7 +109,7 @@ class UserController extends AbstractController
         $uploadDir = __DIR__ . '/../../../public/uploads/avatars/';
 
         // Create directory if it doesn't exist
-        if (!is_dir($uploadDir)) {
+        if (! is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
 
@@ -122,7 +122,7 @@ class UserController extends AbstractController
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         $maxFileSize = 2 * 1024 * 1024; // 2MB
 
-        if (!in_array($file['type'], $allowedTypes)) {
+        if (! in_array($file['type'], $allowedTypes)) {
             $_SESSION['error_message'] = 'Дозволені лише файли зображень (JPG, PNG, GIF).';
             return $this->redirectToRoute('user_profile');
         }

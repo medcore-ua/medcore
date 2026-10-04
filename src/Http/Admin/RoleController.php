@@ -57,7 +57,7 @@ class RoleController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $role = $this->roleRepository->findById($id);
 
-        if (!$role) {
+        if (! $role) {
             return new Response("Роль не знайдено", 404);
         }
 
@@ -78,7 +78,7 @@ class RoleController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $role = $this->roleRepository->findById($id);
 
-        if (!$role) {
+        if (! $role) {
             return new Response("Роль не знайдено", 404);
         }
 

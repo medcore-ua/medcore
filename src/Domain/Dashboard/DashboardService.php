@@ -73,7 +73,7 @@ class DashboardService
 
         foreach ($kpiDefinitions as $definition) {
             $latestResult = $this->kpiResultRepository->findLatestResult($definition['id'], $definition['period'] ?? 'day');
-            if (!$latestResult) {
+            if (! $latestResult) {
                 continue;
             }
 

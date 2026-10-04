@@ -55,7 +55,7 @@ class UserRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'u.first_name', 'u.last_name', 'u.email', 'IDENTITY(u.role) as role_id', 'u.mfa_enabled', "CONCAT(u.first_name, ' ', u.last_name) AS full_name");
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->where('u.first_name LIKE :term')
                ->orWhere('u.last_name LIKE :term')
                ->orWhere('u.email LIKE :term')
@@ -119,10 +119,10 @@ class UserRepository extends ServiceEntityRepository
             // Cast timestamps to DateTime objects for safer usage in views if they are returned as strings.
             // Doctrine usually returns DateTime objects for datetime types if hydrated as array? Actually, it does!
             // But just in case, we do the check from the legacy code:
-            if (!empty($result['created_at']) && is_string($result['created_at'])) {
+            if (! empty($result['created_at']) && is_string($result['created_at'])) {
                 $result['created_at'] = new \DateTimeImmutable($result['created_at']);
             }
-            if (!empty($result['updated_at']) && is_string($result['updated_at'])) {
+            if (! empty($result['updated_at']) && is_string($result['updated_at'])) {
                 $result['updated_at'] = new \DateTimeImmutable($result['updated_at']);
             }
         }
@@ -151,11 +151,11 @@ class UserRepository extends ServiceEntityRepository
         $user->setEmail($data['email']);
         $user->setUsername($username);
 
-        if (!empty($data['password'])) {
+        if (! empty($data['password'])) {
             $user->setPasswordHash(password_hash($data['password'], PASSWORD_DEFAULT));
         }
 
-        if (!empty($data['role_id'])) {
+        if (! empty($data['role_id'])) {
             $role = $this->getEntityManager()->getReference(\App\Domain\User\Role::class, $data['role_id']);
             $user->setRole($role);
         }
@@ -175,13 +175,13 @@ class UserRepository extends ServiceEntityRepository
     public function update(int $id, array $data) : bool
     {
         $oldData = $this->findById($id);
-        if (!$oldData) {
+        if (! $oldData) {
             return false;
         }
 
         /** @var User|null $user */
         $user = $this->find($id);
-        if (!$user) {
+        if (! $user) {
             return false;
         }
 
@@ -198,7 +198,7 @@ class UserRepository extends ServiceEntityRepository
             $role = $this->getEntityManager()->getReference(\App\Domain\User\Role::class, $data['role_id']);
             $user->setRole($role);
         }
-        if (!empty($data['password'])) {
+        if (! empty($data['password'])) {
             $user->setPasswordHash(password_hash($data['password'], PASSWORD_DEFAULT));
         }
 
@@ -214,13 +214,13 @@ class UserRepository extends ServiceEntityRepository
     public function delete(int $id) : bool
     {
         $oldData = $this->findById($id);
-        if (!$oldData) {
+        if (! $oldData) {
             return false;
         }
 
         /** @var User|null $user */
         $user = $this->find($id);
-        if (!$user) {
+        if (! $user) {
             return false;
         }
 
@@ -243,7 +243,7 @@ class UserRepository extends ServiceEntityRepository
     {
         /** @var User|null $user */
         $user = $this->find($userId);
-        if (!$user) {
+        if (! $user) {
             return false;
         }
 

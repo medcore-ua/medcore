@@ -52,7 +52,7 @@ class PublicNewsController extends AbstractController
     {
         $newsArticle = $this->newsRepository->findById($id);
 
-        if (!$newsArticle || !$newsArticle['is_published']) {
+        if (! $newsArticle || ! $newsArticle['is_published']) {
             return $this->render('errors/error.html.twig', [
                 'message' => 'Новина не знайдена або не опублікована.',
                 'detail' => 'Немає статті за вказаним ідентифікатором.'

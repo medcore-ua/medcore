@@ -48,7 +48,7 @@ class InvoiceRepository extends ServiceEntityRepository
             ->select('i.id', 'p.last_name', 'p.first_name', 'i.amount', 'i.status', 'i.issued_date')
             ->join(\App\Domain\Patient\Patient::class, 'p', \Doctrine\ORM\Query\Expr\Join::WITH, 'i.patient_id = p.id');
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $orX = $qb->expr()->orX(
                 $qb->expr()->like('p.last_name', ':term'),
                 $qb->expr()->like('p.first_name', ':term'),
@@ -79,8 +79,8 @@ class InvoiceRepository extends ServiceEntityRepository
     {
         $invoice = new Invoice();
         $invoice->setPatientId((int)$data['patient_id']);
-        $invoice->setAppointmentId(!empty($data['appointment_id']) ? (int)$data['appointment_id'] : null);
-        $invoice->setMedicalRecordId(!empty($data['medical_record_id']) ? (int)$data['medical_record_id'] : null);
+        $invoice->setAppointmentId(! empty($data['appointment_id']) ? (int)$data['appointment_id'] : null);
+        $invoice->setMedicalRecordId(! empty($data['medical_record_id']) ? (int)$data['medical_record_id'] : null);
         $invoice->setAmount((float)$data['amount']);
         $invoice->setStatus($data['status'] ?? 'pending');
         $invoice->setNotes($data['notes'] ?? null);
@@ -155,23 +155,23 @@ class InvoiceRepository extends ServiceEntityRepository
     public function update(int $id, array $data) : bool
     {
         $oldInvoice = $this->findById($id);
-        if (!$oldInvoice) {
+        if (! $oldInvoice) {
             return false;
         }
 
         /** @var Invoice|null $invoice */
         $invoice = $this->find($id);
-        if (!$invoice) {
+        if (! $invoice) {
             return false;
         }
 
         $invoice->setPatientId((int)$data['patient_id']);
 
         if (array_key_exists('appointment_id', $data)) {
-            $invoice->setAppointmentId(!empty($data['appointment_id']) ? (int)$data['appointment_id'] : null);
+            $invoice->setAppointmentId(! empty($data['appointment_id']) ? (int)$data['appointment_id'] : null);
         }
         if (array_key_exists('medical_record_id', $data)) {
-            $invoice->setMedicalRecordId(!empty($data['medical_record_id']) ? (int)$data['medical_record_id'] : null);
+            $invoice->setMedicalRecordId(! empty($data['medical_record_id']) ? (int)$data['medical_record_id'] : null);
         }
 
         $invoice->setAmount((float)$data['amount']);
@@ -181,7 +181,7 @@ class InvoiceRepository extends ServiceEntityRepository
             $invoice->setNotes($data['notes']);
         }
 
-        if ('paid' === $data['status'] && !empty($data['paid_date'])) {
+        if ('paid' === $data['status'] && ! empty($data['paid_date'])) {
             try {
                 $invoice->setPaidDate(new \DateTime($data['paid_date']));
             } catch (\Exception $e) {
@@ -308,7 +308,7 @@ class InvoiceRepository extends ServiceEntityRepository
             $dateObj = $invoice['issued_date'];
             $dateStr = $dateObj->format('Y-m-d');
 
-            if (!isset($daily[$dateStr])) {
+            if (! isset($daily[$dateStr])) {
                 $daily[$dateStr] = 0.0;
             }
             $daily[$dateStr] += (float)$invoice['amount'];

@@ -93,7 +93,7 @@ class DoctorScheduleRepository extends ServiceEntityRepository
     {
         $em = $this->getEntityManager();
         $schedule = $em->getRepository(DoctorSchedule::class)->find($id);
-        if (!$schedule) {
+        if (! $schedule) {
             return false;
         }
 

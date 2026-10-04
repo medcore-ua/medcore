@@ -83,7 +83,7 @@ class LabResourceRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         try {
             $resource = $this->find($id);
-            if (!$resource) {
+            if (! $resource) {
                 return false;
             }
 

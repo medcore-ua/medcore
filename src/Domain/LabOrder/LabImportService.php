@@ -126,7 +126,7 @@ class LabImportService
         ];
 
         $orderId = $this->labOrderRepository->save($orderData);
-        if (!$orderId) {
+        if (! $orderId) {
             throw new Exception("Не вдалося зберегти лабораторне замовлення.");
         }
         return $orderId;

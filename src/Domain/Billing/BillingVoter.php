@@ -49,7 +49,7 @@ class BillingVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token) : bool
     {
         $user = $token->getUser();
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 

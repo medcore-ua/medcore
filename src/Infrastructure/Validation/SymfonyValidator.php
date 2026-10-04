@@ -67,7 +67,7 @@ class SymfonyValidator
                     }
                 }
             }
-            if (!empty($fieldConstraints)) {
+            if (! empty($fieldConstraints)) {
                 $constraints[$field] = $fieldConstraints;
             }
         }
@@ -174,7 +174,7 @@ class SymfonyValidator
                 }
                 $dateTime = \DateTime::createFromFormat('Y-m-d H:i:s', $value);
                 $dateTimeShort = \DateTime::createFromFormat('Y-m-d H:i', $value);
-                if (!$dateTime && !$dateTimeShort) {
+                if (! $dateTime && ! $dateTimeShort) {
                     $context->buildViolation("Поле '{$field}' повинно містити дійсні дату та час.")
                         ->addViolation();
                 }
@@ -234,7 +234,7 @@ class SymfonyValidator
 
     public function hasErrors() : bool
     {
-        return !empty($this->errors);
+        return ! empty($this->errors);
     }
 
     public function getErrors() : array

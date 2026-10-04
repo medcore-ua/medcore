@@ -78,7 +78,7 @@ class PatientInsurancePolicyRepository extends ServiceEntityRepository
     public function update(int $id, int $patientId, int $insuranceCompanyId, string $policyNumber, ?string $groupNumber, string $validFrom, ?string $validTo, bool $isActive) : bool
     {
         $policy = $this->find($id);
-        if (!$policy) {
+        if (! $policy) {
             return false;
         }
 
@@ -99,7 +99,7 @@ class PatientInsurancePolicyRepository extends ServiceEntityRepository
     public function delete(int $id) : bool
     {
         $policy = $this->find($id);
-        if (!$policy) {
+        if (! $policy) {
             return false;
         }
 

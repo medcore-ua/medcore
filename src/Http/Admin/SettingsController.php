@@ -78,7 +78,7 @@ class SettingsController extends AbstractController
         $locale = $_POST['locale'] ?? 'uk';
 
         $mfaForceRoles = [];
-        if (!empty($mfaForceRolesRaw)) {
+        if (! empty($mfaForceRolesRaw)) {
             $mfaForceRoles = array_map('intval', explode(',', $mfaForceRolesRaw));
         }
 

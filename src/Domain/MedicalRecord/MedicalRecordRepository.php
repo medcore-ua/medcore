@@ -85,7 +85,7 @@ class MedicalRecordRepository extends ServiceEntityRepository
             ->join('mr.doctor', 'u')
             ->join('mr.patient', 'p');
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->where("CONCAT(p.last_name, ' ', p.first_name) LIKE :searchTerm")
                ->orWhere("CONCAT(u.last_name, ' ', u.first_name) LIKE :searchTerm")
                ->orWhere('mr.diagnosis_code LIKE :searchTerm')
@@ -118,7 +118,7 @@ class MedicalRecordRepository extends ServiceEntityRepository
             ->where('mr.doctor = :doctor_id')
             ->setParameter('doctor_id', $doctorId);
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->andWhere(
                 $qb->expr()->orX(
                     $qb->expr()->like("CONCAT(p.last_name, ' ', p.first_name)", ':searchTerm'),
@@ -142,12 +142,12 @@ class MedicalRecordRepository extends ServiceEntityRepository
         $doctor = $this->getEntityManager()->getReference(\App\Domain\User\User::class, $data['doctor_id']);
         $mr->setDoctor($doctor);
 
-        if (!empty($data['appointment_id'])) {
+        if (! empty($data['appointment_id'])) {
             $appointment = $this->getEntityManager()->getReference(\App\Domain\Appointment\Appointment::class, $data['appointment_id']);
             $mr->setAppointment($appointment);
         }
 
-        if (!empty($data['visit_date'])) {
+        if (! empty($data['visit_date'])) {
             try {
                 $mr->setVisitDate(new \DateTime($data['visit_date']));
             } catch (\Exception $e) {
@@ -197,13 +197,13 @@ class MedicalRecordRepository extends ServiceEntityRepository
     public function update(int $id, array $data) : bool
     {
         $oldMedicalRecord = $this->findById($id);
-        if (!$oldMedicalRecord) {
+        if (! $oldMedicalRecord) {
             return false;
         }
 
         /** @var MedicalRecord|null $mr */
         $mr = $this->find($id);
-        if (!$mr) {
+        if (! $mr) {
             return false;
         }
 
@@ -218,7 +218,7 @@ class MedicalRecordRepository extends ServiceEntityRepository
         }
 
         if (array_key_exists('appointment_id', $data)) {
-            if (!empty($data['appointment_id'])) {
+            if (! empty($data['appointment_id'])) {
                 $appointment = $this->getEntityManager()->getReference(\App\Domain\Appointment\Appointment::class, $data['appointment_id']);
                 $mr->setAppointment($appointment);
             } else {
@@ -226,7 +226,7 @@ class MedicalRecordRepository extends ServiceEntityRepository
             }
         }
 
-        if (!empty($data['visit_date'])) {
+        if (! empty($data['visit_date'])) {
             try {
                 $mr->setVisitDate(new \DateTime($data['visit_date']));
             } catch (\Exception $e) {

@@ -95,7 +95,7 @@ class KpiRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         try {
             $kpi = $this->find($id);
-            if (!$kpi) {
+            if (! $kpi) {
                 return false;
             }
 
@@ -125,7 +125,7 @@ class KpiRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         try {
             $kpi = $this->find($id);
-            if (!$kpi) {
+            if (! $kpi) {
                 return false;
             }
 

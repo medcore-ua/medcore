@@ -58,7 +58,7 @@ class NewsRepository extends ServiceEntityRepository
         $article->setMeta($data['meta'] ?? null);
         $article->setContent($data['content']);
 
-        if (!empty($data['published_at'])) {
+        if (! empty($data['published_at'])) {
             try {
                 $article->setPublishedAt(new \DateTime($data['published_at']));
             } catch (\Exception $e) {

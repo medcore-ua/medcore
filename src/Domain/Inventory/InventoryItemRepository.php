@@ -42,7 +42,7 @@ class InventoryItemRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('i');
 
-        if (!empty($searchTerm)) {
+        if (! empty($searchTerm)) {
             $qb->andWhere('i.name LIKE :term OR i.inn LIKE :term OR i.supplier LIKE :term OR i.batch_number LIKE :term')
                ->setParameter('term', '%' . $searchTerm . '%');
         }
@@ -95,7 +95,7 @@ class InventoryItemRepository extends ServiceEntityRepository
             if (isset($data['batch_number'])) {
                 $item->setBatchNumber($data['batch_number']);
             }
-            if (!empty($data['expiry_date'])) {
+            if (! empty($data['expiry_date'])) {
                 $item->setExpiryDate(new \DateTime($data['expiry_date']));
             }
             if (isset($data['supplier'])) {
@@ -148,7 +148,7 @@ class InventoryItemRepository extends ServiceEntityRepository
         $em->beginTransaction();
         try {
             $item = $this->find($id);
-            if (!$item) {
+            if (! $item) {
                 $em->rollBack();
                 return false;
             }
@@ -299,7 +299,7 @@ class InventoryItemRepository extends ServiceEntityRepository
         $em->beginTransaction();
         try {
             $item = $this->find($itemId);
-            if (!$item || $item->getQuantity() < $quantity) {
+            if (! $item || $item->getQuantity() < $quantity) {
                 $em->rollBack();
                 return false;
             }

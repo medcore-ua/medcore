@@ -73,7 +73,7 @@ class BackupPolicyRepository extends ServiceEntityRepository
     {
         /** @var BackupPolicy|null $policy */
         $policy = $this->find($id);
-        if (!$policy) {
+        if (! $policy) {
             return false;
         }
 
@@ -112,7 +112,7 @@ class BackupPolicyRepository extends ServiceEntityRepository
     {
         /** @var BackupPolicy|null $policy */
         $policy = $this->find($id);
-        if (!$policy) {
+        if (! $policy) {
             return false;
         }
 

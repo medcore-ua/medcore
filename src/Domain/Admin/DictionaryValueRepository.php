@@ -76,7 +76,7 @@ class DictionaryValueRepository extends ServiceEntityRepository
     {
         /** @var DictionaryValue|null $value */
         $value = $this->find($id);
-        if (!$value) {
+        if (! $value) {
             return false;
         }
 
@@ -108,7 +108,7 @@ class DictionaryValueRepository extends ServiceEntityRepository
     {
         /** @var DictionaryValue|null $value */
         $value = $this->find($id);
-        if (!$value) {
+        if (! $value) {
             return false;
         }
 

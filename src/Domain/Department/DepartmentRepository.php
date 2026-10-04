@@ -79,7 +79,7 @@ class DepartmentRepository extends ServiceEntityRepository
             $department->setDescription($data['description']);
         }
 
-        if (!empty($data['parent_id'])) {
+        if (! empty($data['parent_id'])) {
             $parent = $this->getEntityManager()->getReference(Department::class, $data['parent_id']);
             $department->setParent($parent);
         }
@@ -105,7 +105,7 @@ class DepartmentRepository extends ServiceEntityRepository
     {
         /** @var Department|null $department */
         $department = $this->find($id);
-        if (!$department) {
+        if (! $department) {
             return false;
         }
 
@@ -118,7 +118,7 @@ class DepartmentRepository extends ServiceEntityRepository
         }
 
         if (array_key_exists('parent_id', $data)) {
-            if (!empty($data['parent_id'])) {
+            if (! empty($data['parent_id'])) {
                 $parent = $this->getEntityManager()->getReference(Department::class, $data['parent_id']);
                 $department->setParent($parent);
             } else {
@@ -156,7 +156,7 @@ class DepartmentRepository extends ServiceEntityRepository
         }
 
         $department = $this->find($id);
-        if (!$department) {
+        if (! $department) {
             return false;
         }
 

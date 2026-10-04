@@ -56,7 +56,7 @@ class ClaimRepository extends ServiceEntityRepository
             ->setParameter('id', $id);
 
         $result = $qb->getQuery()->getOneOrNullResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-        if (!$result) {
+        if (! $result) {
             return null;
         }
 
@@ -128,7 +128,7 @@ class ClaimRepository extends ServiceEntityRepository
     public function update(int $id, string $status, ?string $submittedAt = null, ?float $totalPaid = null) : bool
     {
         $claim = $this->find($id);
-        if (!$claim) {
+        if (! $claim) {
             return false;
         }
 

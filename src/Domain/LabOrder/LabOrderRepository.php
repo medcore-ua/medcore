@@ -114,7 +114,7 @@ class LabOrderRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         try {
             $labOrder = $this->find($id);
-            if (!$labOrder) {
+            if (! $labOrder) {
                 return false;
             }
 
@@ -144,7 +144,7 @@ class LabOrderRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         try {
             $labOrder = $this->find($id);
-            if (!$labOrder) {
+            if (! $labOrder) {
                 return false;
             }
 

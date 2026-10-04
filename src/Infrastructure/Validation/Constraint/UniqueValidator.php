@@ -40,7 +40,7 @@ class UniqueValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint) : void
     {
-        if (!$constraint instanceof Unique) {
+        if (! $constraint instanceof Unique) {
             throw new UnexpectedTypeException($constraint, Unique::class);
         }
 

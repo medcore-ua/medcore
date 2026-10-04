@@ -79,7 +79,7 @@ class MedicalRecordController extends AbstractController
         $appointmentId = (int)($_GET['appointment_id'] ?? 0);
         $appointment = $this->appointmentRepository->findById($appointmentId);
 
-        if (!$appointment) {
+        if (! $appointment) {
             return new Response("Запис не знайдено", 404);
         }
 
@@ -119,11 +119,11 @@ class MedicalRecordController extends AbstractController
         $appointmentId = (int)($_GET['appointment_id'] ?? 0);
         $appointment = $this->appointmentRepository->findById($appointmentId);
 
-        if (!$appointment) {
+        if (! $appointment) {
             return new Response("Запис не знайдено", 404);
         }
 
-        if (!empty($_POST['visit_date'])) {
+        if (! empty($_POST['visit_date'])) {
             try {
                 $dt = new \DateTime($_POST['visit_date']);
                 $_POST['visit_date'] = $dt->format('Y-m-d H:i:s');
@@ -150,7 +150,7 @@ class MedicalRecordController extends AbstractController
 
         $medicalRecordId = $this->medicalRecordRepository->save($data);
 
-        if ($medicalRecordId && !empty($_FILES['attachments']['name'][0])) {
+        if ($medicalRecordId && ! empty($_FILES['attachments']['name'][0])) {
             foreach ($_FILES['attachments']['name'] as $key => $name) {
                 if (UPLOAD_ERR_OK === $_FILES['attachments']['error'][$key]) {
                     $fileData = [
@@ -183,7 +183,7 @@ class MedicalRecordController extends AbstractController
 
         $record = $this->medicalRecordRepository->findById($id);
 
-        if (!$record) {
+        if (! $record) {
             return new Response("Медичний запис не знайдено", 404);
         }
 
@@ -236,7 +236,7 @@ class MedicalRecordController extends AbstractController
 
         $record = $this->medicalRecordRepository->findById($id);
 
-        if (!$record) {
+        if (! $record) {
             return new Response("Медичний запис не знайдено", 404);
         }
 
@@ -257,11 +257,11 @@ class MedicalRecordController extends AbstractController
 
         $record = $this->medicalRecordRepository->findById($id);
 
-        if (!$record) {
+        if (! $record) {
             return new Response("Медичний запис не знайдено", 404);
         }
 
-        if (!empty($_POST['visit_date'])) {
+        if (! empty($_POST['visit_date'])) {
             try {
                 $dt = new \DateTime($_POST['visit_date']);
                 $_POST['visit_date'] = $dt->format('Y-m-d H:i:s');
@@ -307,11 +307,11 @@ class MedicalRecordController extends AbstractController
 
         $record = $this->medicalRecordRepository->findById($medicalRecordId);
 
-        if (!$record) {
+        if (! $record) {
             return new Response("Медичний запис не знайдено", 404);
         }
 
-        if (isset($_FILES['attachments']) && !empty($_FILES['attachments']['name'][0])) {
+        if (isset($_FILES['attachments']) && ! empty($_FILES['attachments']['name'][0])) {
             foreach ($_FILES['attachments']['name'] as $key => $name) {
                 if (UPLOAD_ERR_OK === $_FILES['attachments']['error'][$key]) {
                     $fileData = [
@@ -340,7 +340,7 @@ class MedicalRecordController extends AbstractController
         $attachmentId = (int)($_GET['attachment_id'] ?? 0);
         $attachment = $this->attachmentService->getAttachmentById($attachmentId);
 
-        if (!$attachment || 'medical_record' !== $attachment['entity_type']) {
+        if (! $attachment || 'medical_record' !== $attachment['entity_type']) {
             return new Response("Вкладення не знайдено", 404);
         }
 
@@ -349,13 +349,13 @@ class MedicalRecordController extends AbstractController
 
         $record = $this->medicalRecordRepository->findById($medicalRecordId);
 
-        if (!$record) {
+        if (! $record) {
             return new Response("Медичний запис, пов'язаний із вкладенням, не знайдено", 404);
         }
 
         $uploadBase = dirname(__DIR__, 3) . '/uploads/';
         $candidates = [];
-        if (!empty($attachment['filepath'])) {
+        if (! empty($attachment['filepath'])) {
             $candidates[] = $uploadBase . ltrim($attachment['filepath'], '/');
         }
         $path = $uploadBase . 'medical_record/' . $medicalRecordId . '/';
@@ -370,7 +370,7 @@ class MedicalRecordController extends AbstractController
             }
         }
 
-        if (!$fullPath) {
+        if (! $fullPath) {
             return new Response("Файл не знайдено на сервері", 404);
         }
 

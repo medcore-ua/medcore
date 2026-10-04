@@ -52,7 +52,7 @@ class AttachmentAclRepository extends ServiceEntityRepository
         $sql = "SELECT COUNT(*) FROM attachment_acl WHERE attachment_id = :attachment_id";
         $hasAclEntries = $conn->fetchOne($sql, ['attachment_id' => $attachmentId]) > 0;
 
-        return !$hasAclEntries;
+        return ! $hasAclEntries;
     }
 
     public function updateAccess(int $attachmentId, ?int $userId = null, ?int $roleId = null, bool $canView = false, bool $canEdit = false) : bool

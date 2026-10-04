@@ -67,7 +67,7 @@ class MedicalRecordVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 
@@ -105,7 +105,7 @@ class MedicalRecordVoter extends Voter
 
     private function canViewOwn(User $user, ?int $recordId) : bool
     {
-        if (!$recordId) {
+        if (! $recordId) {
             return false;
         }
 
@@ -127,7 +127,7 @@ class MedicalRecordVoter extends Voter
 
     private function canEditOwn(User $user, ?int $recordId) : bool
     {
-        if (!$recordId) {
+        if (! $recordId) {
             return false;
         }
 
@@ -137,7 +137,7 @@ class MedicalRecordVoter extends Voter
     private function isOwner(User $user, int $recordId) : bool
     {
         $userId = $user->getId();
-        if (!$userId) {
+        if (! $userId) {
             return false;
         }
         $medicalRecord = $this->medicalRecordRepository->findById($recordId);

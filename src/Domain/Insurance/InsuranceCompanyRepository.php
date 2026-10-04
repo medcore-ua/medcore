@@ -72,7 +72,7 @@ class InsuranceCompanyRepository extends ServiceEntityRepository
     public function update(int $id, string $name, ?string $contactPerson = null, ?string $phone = null, ?string $email = null, ?string $notes = null) : bool
     {
         $company = $this->find($id);
-        if (!$company) {
+        if (! $company) {
             return false;
         }
 
@@ -91,7 +91,7 @@ class InsuranceCompanyRepository extends ServiceEntityRepository
     public function delete(int $id) : bool
     {
         $company = $this->find($id);
-        if (!$company) {
+        if (! $company) {
             return false;
         }
 

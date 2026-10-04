@@ -110,7 +110,7 @@ class PublicAppointmentController extends AbstractController
         ];
 
         $errors = [];
-        if (!$validator->validate($rawInput, $rules)) {
+        if (! $validator->validate($rawInput, $rules)) {
             foreach ($validator->getErrors() as $key => $messages) {
                 $errors[$key] = $messages;
             }
@@ -130,12 +130,12 @@ class PublicAppointmentController extends AbstractController
                 }
             }
 
-            if (!$isSlotAvailable) {
+            if (! $isSlotAvailable) {
                 $errors['start_time'] = ['The selected time slot is no longer available. Please choose another one.'];
             }
         }
 
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             $doctors = $this->userRepository->findAllDoctors();
             $services = $this->serviceRepository->findAll();
             $selectedDoctorId = (int)($rawInput['doctor_id'] ?? 0);
@@ -164,7 +164,7 @@ class PublicAppointmentController extends AbstractController
 
         // Find or create patient
         $patient = $this->patientRepository->findByEmail($rawInput['email']);
-        if (!$patient) {
+        if (! $patient) {
             $patientId = $this->patientRepository->save([
                 'first_name' => $rawInput['first_name'],
                 'last_name' => $rawInput['last_name'],
@@ -174,7 +174,7 @@ class PublicAppointmentController extends AbstractController
                 'birth_date' => '1900-01-01',
                 'gender' => 'other',
             ]);
-            if (!$patientId) {
+            if (! $patientId) {
                 $errors['patient'] = ['Could not create a new patient record.'];
                 $doctors = $this->userRepository->findAllDoctors();
                 $services = $this->serviceRepository->findAll();

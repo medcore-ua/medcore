@@ -126,7 +126,7 @@ class ScheduleExceptionRepository extends ServiceEntityRepository
     {
         $em = $this->getEntityManager();
         $exception = $em->getRepository(ScheduleException::class)->find($id);
-        if (!$exception) {
+        if (! $exception) {
             return false;
         }
 

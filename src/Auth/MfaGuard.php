@@ -62,7 +62,7 @@ class MfaGuard
                 $this->clearPending();
             }
         } elseif ($step->requiresMfaSetup()) {
-            if ($this->isRequired() && !str_starts_with($requestUri, '/user/mfa/')) {
+            if ($this->isRequired() && ! str_starts_with($requestUri, '/user/mfa/')) {
                 throw new RedirectException('/user/mfa/required');
             }
         }

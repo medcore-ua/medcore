@@ -100,7 +100,7 @@ class AdminRoomController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $room = $this->roomRepository->findById($id);
 
-        if (!$room) {
+        if (! $room) {
             return new Response("Кімнату не знайдено", 404);
         }
 
@@ -115,7 +115,7 @@ class AdminRoomController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $room = $this->roomRepository->findById($id);
 
-        if (!$room) {
+        if (! $room) {
             return new Response("Кімнату не знайдено", 404);
         }
 
@@ -136,7 +136,7 @@ class AdminRoomController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $room = $this->roomRepository->findById($id);
 
-        if (!$room) {
+        if (! $room) {
             return new Response("Кімнату не знайдено", 404);
         }
 
@@ -167,7 +167,7 @@ class AdminRoomController extends AbstractController
         $id = (int)($_POST['id'] ?? 0);
         $room = $this->roomRepository->findById($id);
 
-        if (!$room) {
+        if (! $room) {
             return new Response("Кімнату не знайдено", 404);
         }
 

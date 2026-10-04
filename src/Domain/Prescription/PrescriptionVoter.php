@@ -74,7 +74,7 @@ class PrescriptionVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token) : bool
     {
         $user = $token->getUser();
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return false;
         }
 
@@ -114,7 +114,7 @@ class PrescriptionVoter extends Voter
 
     private function canViewOwn(User $user, ?int $prescriptionId) : bool
     {
-        if (!$prescriptionId) {
+        if (! $prescriptionId) {
             return false;
         }
 
@@ -154,7 +154,7 @@ class PrescriptionVoter extends Voter
 
     private function canEditOwn(User $user, ?int $prescriptionId) : bool
     {
-        if (!$prescriptionId) {
+        if (! $prescriptionId) {
             return false;
         }
 
@@ -166,7 +166,7 @@ class PrescriptionVoter extends Voter
         $context = is_array($subject) ? $subject : [];
         $submittedDoctorId = $context['doctor_id'] ?? null;
 
-        if (!$submittedDoctorId) {
+        if (! $submittedDoctorId) {
             return true;
         }
 
@@ -176,7 +176,7 @@ class PrescriptionVoter extends Voter
     private function isOwner(User $user, int $prescriptionId) : bool
     {
         $userId = $user->getId();
-        if (!$userId) {
+        if (! $userId) {
             return false;
         }
 

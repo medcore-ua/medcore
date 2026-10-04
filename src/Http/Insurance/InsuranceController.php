@@ -63,7 +63,7 @@ class InsuranceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $company = $this->insuranceService->getInsuranceCompany($id);
 
-        if (!$company) {
+        if (! $company) {
             return new Response('404 Not Found: Insurance company not found.', 404);
         }
 
@@ -95,7 +95,7 @@ class InsuranceController extends AbstractController
             'name' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $_SESSION['errors'] = $validator->getErrors();
             $_SESSION['old'] = $_POST;
             return $this->redirectToRoute('insurance_companies_new_get');
@@ -120,7 +120,7 @@ class InsuranceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $company = $this->insuranceService->getInsuranceCompany($id);
 
-        if (!$company) {
+        if (! $company) {
             return new Response("Компанію не знайдено", 404);
         }
 
@@ -140,7 +140,7 @@ class InsuranceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $company = $this->insuranceService->getInsuranceCompany($id);
 
-        if (!$company) {
+        if (! $company) {
             return new Response("Компанію не знайдено", 404);
         }
 
@@ -149,7 +149,7 @@ class InsuranceController extends AbstractController
             'name' => ['required'],
         ];
 
-        if (!$validator->validate($_POST, $rules)) {
+        if (! $validator->validate($_POST, $rules)) {
             $_SESSION['errors'] = $validator->getErrors();
             // Redirect back to edit form
             return $this->redirectToRoute('insurance_companies_edit_get', ['id' => $id]);
@@ -198,7 +198,7 @@ class InsuranceController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $claim = $this->insuranceService->getClaimWithDetails($id);
 
-        if (!$claim) {
+        if (! $claim) {
             return new Response("Кейс не знайдено", 404);
         }
 
@@ -214,8 +214,8 @@ class InsuranceController extends AbstractController
 
         $id = (int)($_POST['id'] ?? 0);
         $status = $_POST['status'] ?? 'draft';
-        $totalPaid = !empty($_POST['total_paid']) ? (float)$_POST['total_paid'] : null;
-        $submittedAt = !empty($_POST['submitted_at']) ? $_POST['submitted_at'] : null;
+        $totalPaid = ! empty($_POST['total_paid']) ? (float)$_POST['total_paid'] : null;
+        $submittedAt = ! empty($_POST['submitted_at']) ? $_POST['submitted_at'] : null;
 
         $this->insuranceService->updateClaimStatus($id, $status, $submittedAt, $totalPaid);
 

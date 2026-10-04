@@ -71,7 +71,7 @@ class LabOrderController extends AbstractController
         $recordId = (int)($_GET['record_id'] ?? 0);
         $medicalRecord = $this->medicalRecordRepository->findById($recordId);
 
-        if (!$medicalRecord) {
+        if (! $medicalRecord) {
             return new Response("Медичний запис не знайдено", 404);
         }
 
@@ -95,7 +95,7 @@ class LabOrderController extends AbstractController
         $recordId = (int)($_GET['record_id'] ?? 0);
         $medicalRecord = $this->medicalRecordRepository->findById($recordId);
 
-        if (!$medicalRecord) {
+        if (! $medicalRecord) {
             return new Response("Медичний запис не знайдено", 404);
         }
 
@@ -121,7 +121,7 @@ class LabOrderController extends AbstractController
             $qrCodeData = $_ENV['APP_BASE_URL'] . '/lab-orders/show?id=' . $labOrderId;
             $qrCodeHash = hash('sha256', $qrCodeData);
             $updateSuccess = $this->labOrderRepository->updateQrCodeHash($labOrderId, $qrCodeHash);
-            if (!$updateSuccess) {
+            if (! $updateSuccess) {
                 error_log("Failed to update QR code hash for lab order ID: " . $labOrderId);
             }
         }
@@ -146,7 +146,7 @@ class LabOrderController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $order = $this->labOrderRepository->findById($id);
 
-        if (!$order) {
+        if (! $order) {
             return new Response("Лабораторне замовлення не знайдено", 404);
         }
 
@@ -167,7 +167,7 @@ class LabOrderController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $order = $this->labOrderRepository->findById($id);
 
-        if (!$order) {
+        if (! $order) {
             return new Response("Лабораторне замовлення не знайдено", 404);
         }
 
@@ -191,7 +191,7 @@ class LabOrderController extends AbstractController
         $id = (int)($_POST['id'] ?? 0);
         $order = $this->labOrderRepository->findById($id);
 
-        if (!$order) {
+        if (! $order) {
             return new Response("Лабораторне замовлення не знайдено", 404);
         }
 
@@ -245,13 +245,13 @@ class LabOrderController extends AbstractController
         }
 
         $tempDir = dirname(__DIR__, 3) . '/uploads/temp/';
-        if (!is_dir($tempDir)) {
+        if (! is_dir($tempDir)) {
             mkdir($tempDir, 0775, true);
         }
         $tempFilename = uniqid('hl7_dicom_temp_', true) . '_' . basename($file['name']);
         $tempPath = $tempDir . $tempFilename;
 
-        if (!move_uploaded_file($file['tmp_name'], $tempPath)) {
+        if (! move_uploaded_file($file['tmp_name'], $tempPath)) {
             $_SESSION['errors']['file'] = 'Не вдалося зберегти завантажений файл для обробки.';
             return $this->redirectToRoute('lab_orders_import');
         }

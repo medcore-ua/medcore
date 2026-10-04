@@ -38,7 +38,7 @@ class DoctrineFactory
         $isDevMode = ($_ENV['APP_DEBUG'] ?? 'true') === 'true';
 
         $cacheDir = $projectDir . '/var/cache/doctrine';
-        if (!is_dir($cacheDir)) {
+        if (! is_dir($cacheDir)) {
             mkdir($cacheDir, 0777, true);
         }
         $cache = clone new FilesystemAdapter('doctrine', 0, $cacheDir);

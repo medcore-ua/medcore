@@ -84,14 +84,14 @@ class WaitlistRepository extends ServiceEntityRepository
 
         $waitlist->setPatientId((int)$data['patient_id']);
 
-        if (!empty($data['desired_doctor_id'])) {
+        if (! empty($data['desired_doctor_id'])) {
             $waitlist->setDesiredDoctorId((int)$data['desired_doctor_id']);
         }
 
-        if (!empty($data['desired_start_time'])) {
+        if (! empty($data['desired_start_time'])) {
             $waitlist->setDesiredStartTime(new \DateTime($data['desired_start_time']));
         }
-        if (!empty($data['desired_end_time'])) {
+        if (! empty($data['desired_end_time'])) {
             $waitlist->setDesiredEndTime(new \DateTime($data['desired_end_time']));
         }
 

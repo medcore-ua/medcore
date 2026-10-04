@@ -132,7 +132,7 @@ class UserController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $user = $this->userRepository->findById($id);
 
-        if (!$user) {
+        if (! $user) {
             return new Response("Користувача не знайдено", 404);
         }
 
@@ -150,7 +150,7 @@ class UserController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $user = $this->userRepository->findById($id);
 
-        if (!$user) {
+        if (! $user) {
             return new Response("Користувача не знайдено", 404);
         }
 
@@ -208,7 +208,7 @@ class UserController extends AbstractController
         $id = (int)($_GET['id'] ?? 0);
         $user = $this->userRepository->findById($id);
 
-        if (!$user) {
+        if (! $user) {
             return new Response("Користувача не знайдено", 404);
         }
 
@@ -221,7 +221,7 @@ class UserController extends AbstractController
             'role_id' => ['required', 'numeric'],
         ];
 
-        if (!empty($_POST['password'])) {
+        if (! empty($_POST['password'])) {
             $rules['password'] = ['min:6'];
         }
 
@@ -250,7 +250,7 @@ class UserController extends AbstractController
         $id = (int)($_POST['id'] ?? 0);
         $user = $this->userRepository->findById($id);
 
-        if (!$user) {
+        if (! $user) {
             return new Response("Користувача не знайдено", 404);
         }
 
@@ -273,7 +273,7 @@ class UserController extends AbstractController
         $id = (int)($_POST['id'] ?? 0);
         $user = $this->userRepository->findById($id);
 
-        if (!$user) {
+        if (! $user) {
             return new Response("Користувача не знайдено", 404);
         }
 
