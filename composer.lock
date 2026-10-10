@@ -2385,20 +2385,23 @@
         },
         {
             "name": "medcore-ua/nk-026-2021-parser",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/medcore-ua/nk-026-2021-parser.git",
-                "reference": "6cb4592b2766e9bc1bc4ce369c908f76fc00eef0"
+                "reference": "05228fb2fe951a1a5df5b1d8f2da588abe772392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/medcore-ua/nk-026-2021-parser/zipball/6cb4592b2766e9bc1bc4ce369c908f76fc00eef0",
-                "reference": "6cb4592b2766e9bc1bc4ce369c908f76fc00eef0",
+                "url": "https://api.github.com/repos/medcore-ua/nk-026-2021-parser/zipball/05228fb2fe951a1a5df5b1d8f2da588abe772392",
+                "reference": "05228fb2fe951a1a5df5b1d8f2da588abe772392",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.95"
             },
             "type": "library",
             "autoload": {
@@ -2419,9 +2422,9 @@
             "description": "A PHP library to parse the NK-026-2021 (Classifier of Medical Interventions) from meddata.pp.ua.",
             "support": {
                 "issues": "https://github.com/medcore-ua/nk-026-2021-parser/issues",
-                "source": "https://github.com/medcore-ua/nk-026-2021-parser/tree/v0.2.0"
+                "source": "https://github.com/medcore-ua/nk-026-2021-parser/tree/v0.2.1"
             },
-            "time": "2026-05-03T21:19:15+00:00"
+            "time": "2026-10-04T06:03:18+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
