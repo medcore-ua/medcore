@@ -2345,20 +2345,23 @@
         },
         {
             "name": "medcore-ua/nk-025-2021-parser",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/medcore-ua/nk-025-2021-parser.git",
-                "reference": "96f2052c84a85cf06c75150e59a12ac31eecf718"
+                "reference": "bd7e0766a63c4875ecaa9194258de1919fba63dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/medcore-ua/nk-025-2021-parser/zipball/96f2052c84a85cf06c75150e59a12ac31eecf718",
-                "reference": "96f2052c84a85cf06c75150e59a12ac31eecf718",
+                "url": "https://api.github.com/repos/medcore-ua/nk-025-2021-parser/zipball/bd7e0766a63c4875ecaa9194258de1919fba63dc",
+                "reference": "bd7e0766a63c4875ecaa9194258de1919fba63dc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.95"
             },
             "type": "library",
             "autoload": {
@@ -2379,9 +2382,9 @@
             "description": "A PHP library to parse the NK-025-2021 medical classifications from meddata.pp.ua.",
             "support": {
                 "issues": "https://github.com/medcore-ua/nk-025-2021-parser/issues",
-                "source": "https://github.com/medcore-ua/nk-025-2021-parser/tree/v0.2.0"
+                "source": "https://github.com/medcore-ua/nk-025-2021-parser/tree/v0.2.1"
             },
-            "time": "2026-05-03T21:20:03+00:00"
+            "time": "2026-10-04T05:58:19+00:00"
         },
         {
             "name": "medcore-ua/nk-026-2021-parser",
