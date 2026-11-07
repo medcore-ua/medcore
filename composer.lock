@@ -3581,16 +3581,16 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v3.7.3",
+            "version": "v3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
-                "reference": "e31324c9a62c0117df80ee08484f02c27ee0f4e2"
+                "reference": "26ca9f1c19b42173d6bcc3c875c6fbe8a82096de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/e31324c9a62c0117df80ee08484f02c27ee0f4e2",
-                "reference": "e31324c9a62c0117df80ee08484f02c27ee0f4e2",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/26ca9f1c19b42173d6bcc3c875c6fbe8a82096de",
+                "reference": "26ca9f1c19b42173d6bcc3c875c6fbe8a82096de",
                 "shasum": ""
             },
             "require": {
@@ -3616,7 +3616,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.7-dev"
+                    "dev-main": "3.8-dev"
                 }
             },
             "autoload": {
@@ -3656,7 +3656,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/contracts/tree/v3.7.3"
+                "source": "https://github.com/symfony/contracts/tree/v3.8.1"
             },
             "funding": [
                 {
@@ -3676,7 +3676,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-04T08:41:16+00:00"
+            "time": "2026-10-20T17:38:25+00:00"
         },
         {
             "name": "symfony/dependency-injection",
